@@ -1,40 +1,32 @@
-## 团团云自习
+## TuanTuan Cloud Study
 
-### 简介
+### Introduction
 
-线上自习室打破了时间、空间的束缚，比线下自习室更方便，形式也更多样。
-因此，在这样的时代背景下，我开发了“团团自习室”供学生线上自习
+The online study room breaks the limitations of time and space, making it more convenient and versatile than traditional offline study rooms. Therefore, in this context, I developed the "TuanTuan Cloud Study" for students to study online.
 
-**开发语言**：Kotlin
+**Development Language**：Kotlin
 
-本项目使用 MVVM 架构，使用了 Jetpack 组件 和 Material Design 的 设计语言，网络库 为 Retrofit
+This project uses the MVVM architecture and incorporates Jetpack components and Material Design language. The networking library used is Retrofit.
 
-本项目仅供学习使用。
-
-
-
-### 项目地址
-
-| 平台  | selfstudy-server（服务端）                   | StudyRoom（Android端）              |
-| ----- | ------------------------------------------ | ----------------------------------- |
-| Gitee | **服务端暂未开源**                             | https://gitee.com/oswuhan/StudyRoom |
+This project is for learning purposes only.
 
 
 
-**云自习APP服务端接口文档**
+### Project Links
 
-链接: https://www.apifox.cn/apidoc/shared-97a135e0-029f-4bee-8db9-813d2298ff2a 
-
-密码 : cFO2WWrb
-
-
-
-### 安装包下载地址
-
-https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk
+| 平台     | selfstudy-server（Backend）                   | StudyRoom（Android）              |
+|--------| ------------------------------------------ | ----------------------------------- |
+| github | https://github.com/yang-jiacheng/selfstudy-server | https://github.com/yang-jiacheng/StudyRoom |
 
 
-### 预览
+
+
+### Download the APK
+
+[https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk](DOWNLOAD)
+
+
+### Preview
 
 <center>
 <figure>
@@ -88,7 +80,7 @@ https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/stud
 ### License
 
 ```license
-Copyright 2022 jiacheng yang.
+Copyright 2024 jiacheng yang.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -103,8 +95,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-如有任何问题请联系：杨嘉诚
+For any inquiries, please contact: jiacheng yang
 
-微信号：crushed_whiskey
+WeChat: crushed_whiskey
 
-邮箱：1529425632@qq.com
+Email: yjc1529425632@gmail.com
