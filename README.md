@@ -29,10 +29,12 @@ This project is for learning purposes only.
 ### Preview
 
 <center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/login.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/index.jpg" />
-</figure>
+    <figure style="display: inline-block;">
+        <img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/login.jpg" />
+    </figure>
+    <figure style="display: inline-block;">
+        <img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/index.jpg" />
+    </figure>
 </center>
 
 <center>
