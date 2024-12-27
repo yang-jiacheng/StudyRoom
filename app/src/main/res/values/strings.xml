@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">团团云自习</string>
+    <string name="agreement"><u>《用户协议》</u></string>
+    <string name="policy"><u>《隐私政策》</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tvCreateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16sp"
+        android:layout_marginTop="16sp"
+        android:text="2023-02-07 17:21:55"
+        android:textColor="#ff9ba3b2"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvDiary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:paddingTop="16sp"
+        android:paddingRight="16sp"
+        android:scaleType="centerInside"
+        android:text="添加自习笔记"
+        android:textColor="#ff9ba3b2"
+        android:textSize="14sp"
+        app:drawableLeftCompat="@drawable/ic_edit_study_tag" />
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCreateTime"
+        android:layout_marginLeft="16sp"
+        android:layout_marginTop="10sp"
+        android:text="在xx图书馆自习"
+        android:textColor="@color/primary_text_color"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCreateTime"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:text="100分钟"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp" />
+
+
+    <ImageView
+        android:background="@drawable/shape_point_line"
+        android:layout_width="fill_parent"
+        android:layout_height="2.0dip"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentBottom="true" />
+
+
+</RelativeLayout>

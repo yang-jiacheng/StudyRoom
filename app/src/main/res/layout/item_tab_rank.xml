@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+
+    android:layout_height="75dp">
+
+    <LinearLayout
+        android:id="@+id/rankItemLayout"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/itemRank"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_text_color"
+            android:text="1"
+            android:textSize="16sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="5dp"
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:scaleType="fitXY"
+            app:shapeAppearance="@style/CircleStyle"
+            android:src="@drawable/def_path"
+            android:layout_marginStart="15dp"
+            android:id="@+id/itemProfile"
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/itemName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/primary_text_color"
+                android:textSize="16sp"
+
+                tools:text="碎冰威士忌" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:id="@+id/itemTime"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/primary_text_color"
+                android:textSize="16sp"
+
+                tools:text="0分钟" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

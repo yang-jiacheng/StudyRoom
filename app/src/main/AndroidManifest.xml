@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.lxy.studyroom">
+
+    <!--网络请求需要的-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--读取外部存储-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!--写入外部存储-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--管理外部存储-->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" tools:ignore="ProtectedPermissions" />
+    <!--相机权限-->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!--自动更新URI跳转安装时需要-->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <!-- Android 13版本适配，细化存储权限 -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+
+    <queries package="com.lxy.studyroom">
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".StudyRoomApplication"
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="${flavors}"
+        android:requestLegacyExternalStorage="true"
+        android:resizeableActivity="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.StudyRoom"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="33">
+        <activity
+            android:name=".ui.feedback.EditFeedbackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.feedback.FeedbackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.statistics.AllRecordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.statistics.StatisticsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.personalcenter.EditUserInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.rank.OtherUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.rank.TotalRankActivity"
+            android:exported="false"
+            android:theme="@style/FruitActivityTheme" />
+        <activity
+            android:name=".ui.room.EditNoteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.room.StudyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.room.RoomDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.personalcenter.MySettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.personalcenter.PersonalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.LoginPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.policy.PolicyWebViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:launchMode="singleTask"
+            android:exported="false" />
+        <activity
+            android:name=".ui.room.LibraryRoomActivity"
+            android:exported="false"
+            android:theme="@style/FruitActivityTheme" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

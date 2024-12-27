@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFF</color>
+    <color name="colorPrimary">#258EEC</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorBody">#f2f2f2</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorTheme">#ff3c3c</color>
+    <color name="colorOnSurface">#8f8f8f</color>
+    <color name="dark_gray_color">#ff999999</color>
+    <color name="pink">#FF80AB</color>
+<!-- 图片蒙版   -->
+    <color name="mask">#66070707</color>
+<!--    相册选择-->
+    <color name="ps_color_grey">#393a3e</color>
+    <!-- hintview   -->
+    <color name="hintView">#CCE0E7EF</color>
+
+    <!-- roomColor   -->
+    <color name="roomColor">#DEECFD</color>
+
+    <color name="ps_color_black">#000000</color>
+    <color name="ps_color_53575e">#53575e</color>
+
+    <color name="color_tab_1">#455C65</color>
+    <color name="color_tab_2">#ff8c6a</color>
+    <color name="color_tab_3">#383547</color>
+    <color name="color_tab_4">#444153</color>
+
+    <color name="primaryM3">#6750A4</color>
+    <color name="primaryInverseM3">#D0BCFF</color>
+    <color name="primaryContainerM3">#EADDFF</color>
+    <color name="common_accent_color">#5A8DDF</color>
+
+    <color name="tertiary_container">#FFD8E4</color>
+    <color name="tertiary_container2">#7D5260</color>
+    <color name="black25">#40000000</color>
+    <!-- 浅色系 -->
+    <color name="lightGreen">#33cabb</color>
+    <color name="lightPurple">#818fee</color>
+    <!-- 深色系 -->
+    <color name="deepBlue">#ff000000</color>
+    <color name="deepRed">#e91e63</color>
+    <!-- 亮色系 -->
+    <color name="brightPink">#f96197</color>
+    <color name="brightPurple">#926dde</color>
+    <color name="brightBlue">#48b0f7</color>
+    <color name="brightBlue_2">#1E9FFF</color>
+    <color name="brightGreen">#15c377</color>
+    <color name="brightRed">#f96868</color>
+    <color name="brightOrange">#faa64b</color>
+    <color name="brightCyan">#57c7d4</color>
+    <color name="brightBrown">#8d6658</color>
+    <color name="brightYellow">#fcc525</color>
+    <color name="brightSecondary">#D6D9DC</color>
+    <color name="brightBlack">#465161</color>
+
+    <color name="disabled_col">#eee</color>
+
+    <!-- Baseline palette – Primary -->
+    <color name="m3_ref_palette_primary99">#fffffbfe</color>
+    <color name="m3_ref_palette_primary95">#fff6edff</color>
+    <color name="m3_ref_palette_primary90">#ffeaddff</color>
+    <color name="m3_ref_palette_primary80">#ffd0bcff</color>
+    <color name="m3_ref_palette_primary70">#ffb69df8</color>
+    <color name="m3_ref_palette_primary60">#ff9a82db</color>
+    <color name="m3_ref_palette_primary50">#ff7f67be</color>
+    <color name="m3_ref_palette_primary40">#ff6750a4</color>
+    <color name="m3_ref_palette_primary30">#ff4f378b</color>
+    <color name="m3_ref_palette_primary20">#ff381e72</color>
+    <color name="m3_ref_palette_primary10">#ff21005d</color>
+    <color name="m3_ref_palette_primary0">#ff000000</color>
+
+    <!-- Baseline palette – Error -->
+    <color name="m3_ref_palette_error99">#fffffbf9</color>
+    <color name="m3_ref_palette_error95">#fffceeee</color>
+    <color name="m3_ref_palette_error90">#fff9dedc</color>
+    <color name="m3_ref_palette_error80">#fff2b8b5</color>
+    <color name="m3_ref_palette_error70">#ffec928e</color>
+    <color name="m3_ref_palette_error60">#ffe46962</color>
+    <color name="m3_ref_palette_error50">#ffdc362e</color>
+    <color name="m3_ref_palette_error40">#ffb3261e</color>
+    <color name="m3_ref_palette_error30">#ff8c1d18</color>
+    <color name="m3_ref_palette_error20">#ff601410</color>
+    <color name="m3_ref_palette_error10">#ff410e0b</color>
+    <color name="m3_ref_palette_error0">#ff000000</color>
+
+    <!-- Baseline palette – Secondary -->
+    <color name="m3_ref_palette_secondary99">#fffffbfe</color>
+    <color name="m3_ref_palette_secondary95">#fff6edff</color>
+    <color name="m3_ref_palette_secondary90">#ffe8def8</color>
+    <color name="m3_ref_palette_secondary80">#ffccc2dc</color>
+    <color name="m3_ref_palette_secondary70">#ffb0a7c0</color>
+    <color name="m3_ref_palette_secondary60">#ff958da5</color>
+    <color name="m3_ref_palette_secondary50">#ff7a7289</color>
+    <color name="m3_ref_palette_secondary40">#ff625b71</color>
+    <color name="m3_ref_palette_secondary30">#ff4a4458</color>
+    <color name="m3_ref_palette_secondary20">#ff332d41</color>
+    <color name="m3_ref_palette_secondary10">#ff1d192b</color>
+    <color name="m3_ref_palette_secondary0">#ff000000</color>
+
+    <!-- Baseline palette – Tertiary -->
+    <color name="m3_ref_palette_tertiary99">#fffffbfa</color>
+    <color name="m3_ref_palette_tertiary95">#ffffecf1</color>
+    <color name="m3_ref_palette_tertiary90">#ffffd8e4</color>
+    <color name="m3_ref_palette_tertiary80">#ffefb8c8</color>
+    <color name="m3_ref_palette_tertiary70">#ffd29dac</color>
+    <color name="m3_ref_palette_tertiary60">#ffb58392</color>
+    <color name="m3_ref_palette_tertiary50">#ff986977</color>
+    <color name="m3_ref_palette_tertiary40">#ff7d5260</color>
+    <color name="m3_ref_palette_tertiary30">#ff633b48</color>
+    <color name="m3_ref_palette_tertiary20">#ff492532</color>
+    <color name="m3_ref_palette_tertiary10">#ff31111d</color>
+    <color name="m3_ref_palette_tertiary0">#ff000000</color>
+
+    <color name="primary_text_color">#333</color>
+    <color name="secondary_text_color">#666</color>
+
+
+
+
+
+</resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/bg_library_detail_dialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/libraryDetClose"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_close_dialog"
+        android:background="?android:attr/selectableItemBackground"
+        android:scaleType="centerInside" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/libraryDetIcon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="163dp"
+        android:adjustViewBounds="true"
+        android:padding="4dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/def_path"
+        android:layout_marginTop="80dp"
+        app:shapeAppearance="@style/RoundedStyleLibrary"
+        app:strokeColor="@color/primaryContainerM3"
+        app:strokeWidth="4dp"
+
+        />
+
+
+    <TextView
+        android:textSize="14sp"
+        android:textColor="#ff837038"
+        android:id="@+id/libraryDetDesc"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="39dp"
+        android:lineSpacingExtra="5dp"
+        android:maxLines="8"
+        android:lineSpacingMultiplier="1.5" />
+</LinearLayout>

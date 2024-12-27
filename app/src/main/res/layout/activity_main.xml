@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.MainActivity"
+
+    >
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_all_library"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/allLibrary"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="100dp" />
+
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+<!--    <com.hjq.bar.TitleBar-->
+<!--        android:id="@+id/titleBar"-->
+<!--        android:background="@color/transparent"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:leftIcon="@drawable/def_path"-->
+<!--        app:leftIconHeight="26dp"-->
+<!--        app:lineVisible="false"-->
+<!--        app:title="自习图书馆"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        />-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/def_path"
+            android:padding="6dp"
+            app:shapeAppearance="@style/CircleStyle"
+            android:layout_marginStart="8dp"
+            android:id="@+id/allUserPro"
+            android:scaleType="centerCrop"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp"
+            android:background="?android:attr/selectableItemBackground"
+            />
+
+        <TextView
+            style="@style/TitleTextStyle"
+            android:text="自习图书馆"
+            android:textSize="14sp"
+        />
+
+    </FrameLayout>
+
+
+    <ImageView
+        android:id="@+id/imgStudyRank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_study_rank"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="98dp"
+        android:background="?android:attr/selectableItemBackground"
+
+        />
+
+    <ImageView
+        android:id="@+id/imgStudyDiary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_study_statistics"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="30dp"
+        android:background="?android:attr/selectableItemBackground"
+        />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imgStudyStatistics"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/ic_study_statistics"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginBottom="30dp"-->
+<!--        />-->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

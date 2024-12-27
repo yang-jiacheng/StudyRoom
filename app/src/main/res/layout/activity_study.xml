@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.room.StudyActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_studying_bg"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ImageView
+        android:id="@+id/acStImgDesk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_studying_desk"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/acStStudyPerson"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginBottom="80dp"
+        android:src="@drawable/ic_studying_person"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/acStImgDesk" />
+
+    <ImageView
+        android:id="@+id/acStMusic"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/ic_music_box"
+        android:background="?android:attr/selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/acStImgDesk"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/acStTagView"
+        android:layout_width="135dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/bg_study_tag_record_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/acStTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="标签"
+        android:textColor="@color/primary_text_color"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/acStTagView"
+        app:layout_constraintEnd_toEndOf="@+id/acStTagView"
+        app:layout_constraintStart_toStartOf="@+id/acStTagView"
+        app:layout_constraintTop_toTopOf="@+id/acStTagView" />
+
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/acStTitleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:fitsSystemWindows="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:leftIcon="@drawable/ic_back"
+        app:lineVisible="false"
+
+        app:title="座位号" >
+
+
+    </com.hjq.bar.TitleBar>
+
+    <RelativeLayout
+        android:id="@+id/acStTimeCountLayout"
+        android:layout_width="263dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/bg_studying_info"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/acStTitleBar">
+
+        <TextView
+            android:id="@+id/acStTimeCount"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="16dp"
+            android:minWidth="110dp"
+            android:text="00 : 28 : 23"
+            android:paddingLeft="3dp"
+            android:textColor="@color/primary_text_color"
+            android:textSize="32sp"
+            app:drawableLeftCompat="@drawable/ic_clock" />
+
+
+        <Chronometer
+            android:id="@+id/acStChronometer"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="16dp"
+            android:minWidth="110dp"
+            android:format="00:00:00"
+            android:text="60"
+            android:paddingLeft="3dp"
+            android:textColor="@color/primary_text_color"
+            android:textSize="32sp"
+            android:drawableStart="@drawable/ic_clock"
+
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/acStTimeCountLayoutTwo"
+        android:visibility="gone"
+        android:layout_width="200dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_studying_info"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/acStTimeCountLayout">
+
+        <TextView
+            android:id="@+id/acStTimeCountTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="16dp"
+            android:minWidth="100dp"
+            android:text="自习时长：40分钟"
+            android:textColor="@color/primary_text_color"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/acStImgLine1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_studying_info_line"
+        android:visibility="gone"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toBottomOf="@+id/acStTimeCountLayoutTwo"
+        app:layout_constraintStart_toStartOf="@+id/acStTimeCountLayoutTwo" />
+
+
+    <ImageView
+        android:id="@+id/acStImgLine2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/bg_studying_info_line"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/acStTimeCountLayoutTwo"
+        app:layout_constraintEnd_toEndOf="@+id/acStTimeCountLayoutTwo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

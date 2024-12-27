@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/feedItemPro"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+
+        android:background="?android:attr/selectableItemBackground"
+        android:padding="3dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/def_path"
+        app:shapeAppearance="@style/CircleStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
+    <TextView
+        android:id="@+id/feedItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:textSize="13sp"
+        android:text="碎冰威士忌"
+        android:textColor="@color/secondary_text_color"
+        app:layout_constraintStart_toEndOf="@+id/feedItemPro"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/feedItemDel"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:text="删除"
+        android:textColor="@color/deepRed"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.hjq.shape.view.ShapeEditText
+        android:id="@+id/feedItemContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:gravity="start"
+        android:inputType="textMultiLine"
+        android:enabled="false"
+        android:maxLength="255"
+        android:textColor="@color/primary_text_color"
+        android:textSize="14sp"
+        android:text="q1wq"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedItemPro"
+        app:shape_solidColor="@color/white" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/feedItemPic"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintDimensionRatio="1"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/def_cover"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedItemContent"
+        app:shapeAppearance="@style/ShapeableImageViewRounded" />
+
+
+    <TextView
+        android:id="@+id/feedItemTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="2022年01月23日 22:32"
+        android:textColor="@color/secondary_text_color"
+        android:textSize="12sp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedItemPic" />
+
+    <com.hjq.shape.view.ShapeEditText
+        android:id="@+id/feedItemReply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:enabled="false"
+        android:gravity="start"
+        android:inputType="textMultiLine"
+        android:maxLength="255"
+        android:textColor="@color/primary_text_color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedItemTime"
+        app:shape_solidColor="@color/colorBody" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_marginTop="15dp"
+        android:background="@color/colorBody"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/feedItemReply" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

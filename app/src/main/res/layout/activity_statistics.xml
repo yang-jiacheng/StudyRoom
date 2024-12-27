@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/stSyRefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_study_statistics"
+
+        tools:context=".ui.main.statistics.StatisticsActivity">
+
+        <com.hjq.bar.TitleBar
+            android:id="@+id/stSyTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:fitsSystemWindows="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftIcon="@drawable/ic_back"
+            app:lineVisible="false"
+             />
+
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0.0dip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stSyTitleBar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+
+                <RelativeLayout
+                    android:id="@+id/stSyTopLayout"
+                    android:background="@drawable/bg_study_statistics_top"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/stSyMineIcon"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="38dp"
+                        android:layout_marginTop="56dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/def_path"
+                        app:shapeAppearance="@style/CircleStyle" />
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="35dp"
+                        android:layout_marginTop="44dp"
+                        android:layout_toRightOf="@id/stSyMineIcon"
+                        android:text="今日自习时长"
+                        android:textColor="#ff9ba3b2"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/stSyToday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv1"
+                        android:layout_alignLeft="@+id/tv1"
+                        android:layout_marginTop="8dp"
+                        android:text="0分钟"
+                        android:textColor="@color/primary_text_color"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/stSyAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/stSyToday"
+                        android:layout_alignLeft="@+id/tv1"
+                        android:layout_marginTop="20sp"
+                        android:text="累积自习时长"
+                        android:textColor="#ff9ba3b2"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/stSyAllDuration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/stSyAll"
+                        android:layout_marginTop="8dp"
+                        android:layout_alignLeft="@+id/tv1"
+                        android:text="xxxx"
+                        android:textColor="@color/primary_text_color"
+                        android:textSize="16sp" />
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:id="@+id/llRank"
+                    android:background="@drawable/bg_study_rank"
+                    android:paddingTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/stSyTopLayout">
+
+                    <TextView
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="世界排名：" />
+
+                    <TextView
+                        android:textSize="20dp"
+                        android:textColor="@color/white"
+                        android:id="@+id/stSyRank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000+" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/bg_study_tag_record"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/llRank">
+
+                    <TextView
+                        android:textSize="16sp"
+                        android:textColor="@color/primary_text_color"
+                        android:gravity="center"
+                        android:background="@drawable/bg_study_record_text"
+                        android:paddingLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="自习记录" />
+
+                    <TextView
+                        android:id="@+id/stSyMoreRecord"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:padding="20dp"
+                        android:text="更多"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRecord"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/stSyMoreRecord" />
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+

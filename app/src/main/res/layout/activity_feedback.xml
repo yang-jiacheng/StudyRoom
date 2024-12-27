@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.feedback.FeedbackActivity">
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/feedTitleBar"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:leftIcon="@drawable/ic_back"
+        app:lineVisible="false"
+        app:title="意见反馈" />
+
+<!--    <androidx.core.widget.NestedScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        >-->
+
+<!--        -->
+
+<!--    </androidx.core.widget.NestedScrollView>-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/feed_banner"
+                android:padding="5dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/allUserPro"
+                android:scaleType="centerCrop"
+                app:shapeAppearance="@style/ShapeableRoundedFeednack"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp"
+                android:background="?android:attr/selectableItemBackground"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorBody"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                >
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/feedAllBtn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_marginStart="15dp"
+                    android:layout_width="60dp"
+                    android:layout_height="39dp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/colorPrimary"
+                    android:textAllCaps="false"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/white"
+                    app:strokeColor="@color/primary_text_color"
+                    android:text="全部"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/feedMineBtn"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="60dp"
+                    android:layout_height="39dp"
+                    android:layout_gravity="center_vertical"
+
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/white"
+                    app:strokeColor="@color/primary_text_color"
+                    android:text="我的"/>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/feedRecyclerView"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/feedAddBtn"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="20dp"
+            app:fabSize="normal"
+            android:src="@drawable/ic_edit"
+             />
+
+    </FrameLayout>
+
+
+
+
+
+
+</LinearLayout>

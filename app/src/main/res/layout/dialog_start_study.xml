@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/bg_start_study_dialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0">
+
+        <ImageView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="37dp"
+            android:src="@drawable/bg_study_tag_bottom"
+            app:layout_constraintBottom_toBottomOf="@id/diaStStName"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:textSize="20sp"
+            android:textColor="@color/primary_text_color"
+            android:id="@+id/diaStStName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="37dp"
+            android:layout_marginTop="40dp"
+            android:text="自习计划"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/diaStStClose"
+            android:padding="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_close_dialog"
+            android:background="?android:attr/selectableItemBackground"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#ff535a65"
+            android:id="@+id/diaStStTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="37dp"
+            android:layout_marginTop="50dp"
+            android:text="自习标签" app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/diaStStName" />
+
+        <com.hjq.shape.view.ShapeEditText
+            android:id="@+id/diaStStStudyTag"
+            android:padding="10dp"
+            android:layout_width="0.0dip"
+            android:layout_height="36dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="40dp"
+            android:singleLine="true"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableRight="@drawable/ic_edit_study_tag"
+            app:layout_constraintBottom_toBottomOf="@id/diaStStTag"
+            app:layout_constraintLeft_toRightOf="@id/diaStStTag"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/diaStStTag"
+            app:shape_radius="8dp"
+            android:maxLines="1"
+            android:maxLength="6"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:textColor="@color/primary_text_color"
+            android:hint="最大长度为6个字符"
+            app:shape_solidColor="@color/colorBody" />
+
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#ff535a65"
+            android:id="@+id/diaStStType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="计时方式"
+            app:layout_constraintLeft_toLeftOf="@id/diaStStTag"
+            app:layout_constraintRight_toRightOf="@id/diaStStTag"
+            app:layout_constraintTop_toBottomOf="@id/diaStStTag" />
+
+        <com.hjq.shape.layout.ShapeLinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0.0dip"
+            android:layout_height="36dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="40dp"
+            app:layout_constraintBottom_toBottomOf="@id/diaStStType"
+            app:layout_constraintLeft_toRightOf="@id/diaStStType"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/diaStStType"
+            app:shape_radius="8dp"
+            app:shape_solidColor="@color/colorBody">
+
+            <TextView
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:id="@+id/diaStStCountdown"
+                android:background="@drawable/bg_countdown_type"
+                android:layout_width="0.0dip"
+                android:layout_height="match_parent"
+                android:text="倒计时"
+                android:layout_weight="1.0" />
+
+            <TextView android:gravity="center"
+                android:id="@+id/diaStStPositiveTime"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:background="@color/colorBody"
+                android:text="正计时"
+                android:textColor="@color/colorPrimary"
+                android:layout_weight="1.0" />
+
+        </com.hjq.shape.layout.ShapeLinearLayout>
+
+        <ImageView android:id="@+id/imgPositiveTime"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_positive_time"
+            app:layout_constraintBottom_toTopOf="@id/diaStStStart"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/diaStStType" />
+
+        <TextView android:textSize="16sp"
+            android:textColor="#ff535a65"
+            android:id="@+id/studyTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:text="自习时长"
+
+            app:layout_constraintLeft_toLeftOf="@id/diaStStType"
+            app:layout_constraintTop_toBottomOf="@id/diaStStType" />
+
+        <com.hjq.shape.view.ShapeEditText
+            android:id="@+id/diaStStCount"
+            android:padding="10dp"
+            android:layout_width="0.0dip"
+            android:layout_height="36dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="40dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:drawableRight="@drawable/ic_edit_study_tag"
+            app:layout_constraintBottom_toBottomOf="@id/studyTime"
+            app:layout_constraintLeft_toRightOf="@id/studyTime"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/studyTime"
+            app:shape_radius="8dp"
+            android:inputType="number"
+            android:maxLength="3"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="@color/primary_text_color"
+            android:hint="最大三位数,单位分钟"
+            app:shape_solidColor="@color/colorBody" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/diaStStStart"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="53dp"
+            android:text="开始学习"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>

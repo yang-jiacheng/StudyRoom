@@ -1,0 +1,160 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+
+ext {
+
+    prod_host = '"http://115.29.185.30/selfStudyApp/"'
+    prod_domain = '"http://115.29.185.30"'
+
+    local_host = '"' + "http://192.168.21.90:8072/selfStudyApp/" + '"'
+    local_domain = "http://192.168.21.90:8072"
+
+    oss_prefix = '"https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com"'
+
+}
+
+android {
+    compileSdk 33
+
+    defaultConfig {
+        applicationId 'com.lxy.studyroom'
+        minSdk 21
+        targetSdk 33
+        versionCode 7
+        versionName "1.0.6"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('../studyroom.jks')
+            storePassword 'yjc010709'
+            keyAlias 'studyroomprod'
+            keyPassword 'yjc010709'
+        }
+        release {
+            storeFile file('../studyroom.jks')
+            storePassword 'yjc010709'
+            keyAlias 'studyroomprod'
+            keyPassword 'yjc010709'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+    flavorDimensions "main"
+    productFlavors {
+        prod {
+            buildConfigField "String", "API_HOST", prod_host
+            buildConfigField "String", "DOMAIN", prod_domain
+            buildConfigField "String", "OSS_PREFIX", oss_prefix
+            dimension "main"
+            manifestPlaceholders = ["flavors"    : "团团云自习"]
+        }
+        local {
+            buildConfigField "String", "API_HOST", local_host
+            buildConfigField "String", "DOMAIN", '"' + local_domain + '"'
+            buildConfigField "String", "OSS_PREFIX", oss_prefix
+            dimension "main"
+            manifestPlaceholders = ["flavors"    : "团团云自习-本地"]
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.productFlavors[0].name == "local") {
+                outputFileName = "studyroom-local.apk"
+            } else {
+                outputFileName = "${defaultConfig.applicationId}-${defaultConfig.versionName}-${defaultConfig.versionCode}.apk"
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // swiperefreshlayout 下拉刷新控件
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    //lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    //livedata
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    //gson
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0'
+    //kotlin协程
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
+    runtimeOnly 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    //datastore-preferences-rxjava2
+    implementation 'androidx.datastore:datastore-preferences:1.0.0'
+    implementation "androidx.datastore:datastore-preferences-rxjava2:1.0.0"
+    //hutool
+    implementation 'cn.hutool:hutool-all:5.8.3'
+    //日志拦截器 https://github.com/ihsanbal/LoggingInterceptor
+    implementation('com.github.ihsanbal:LoggingInterceptor:3.1.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+    //开源图片加载库
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.14.2'
+    //沉浸式状态栏 https://github.com/gyf-dev/ImmersionBar
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+    // 标题栏框架：https://github.com/getActivity/TitleBar
+    implementation 'com.github.getActivity:TitleBar:10.0'
+    //RecyclerView 适配器
+    //implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.10'
+    //
+    implementation 'com.blankj:utilcodex:1.31.0'
+    // Shape 框架：https://github.com/getActivity/ShapeView
+    implementation 'com.github.getActivity:ShapeView:6.0'
+    // PictureSelector basic
+    implementation 'io.github.lucksiege:pictureselector:v3.10.7'
+    // 图片裁剪
+    implementation 'io.github.lucksiege:ucrop:v3.10.7'
+    //加载gif动图，99%避免 OOM
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.25'
+    //大图查看
+    implementation 'com.github.SherlockGougou:BigImageViewPager:androidx-7.2.1'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    //权限
+    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
+    //省市区选择器
+    implementation 'com.github.gzu-liyujiang.AndroidPicker:AddressPicker:3.1.2'
+
+    // https://mvnrepository.com/artifact/commons-codec/commons-codec
+    implementation 'commons-codec:commons-codec:1.10'
+
+    implementation 'me.jessyan:progressmanager:1.5.0'
+
+}
