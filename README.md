@@ -29,12 +29,8 @@ This project is for learning purposes only.
 ### Preview
 
 <center>
-    <figure style="display: inline-block;">
-        <img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/login.jpg" />
-    </figure>
-    <figure style="display: inline-block;">
-        <img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/index.jpg" />
-    </figure>
+    <img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/login.jpg" width="45%" />
+    <img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/index.jpg" width="45%" />
 </center>
 
 <center>
