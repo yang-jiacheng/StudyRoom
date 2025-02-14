@@ -150,7 +150,7 @@ dependencies {
     //权限
     implementation 'com.guolindev.permissionx:permissionx:1.7.1'
     //省市区选择器
-    implementation 'com.github.gzu-liyujiang.AndroidPicker:AddressPicker:3.1.2'
+    implementation 'com.github.gzu-liyujiang.AndroidPicker:AddressPicker:4.0.0'
 
     // https://mvnrepository.com/artifact/commons-codec/commons-codec
     implementation 'commons-codec:commons-codec:1.10'
