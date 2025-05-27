@@ -21,58 +21,15 @@ This project is for learning purposes only.
 
 
 
-### Download the APK
+### Download the APK 
 
-[https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk](DOWNLOAD)
+https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk
 
 
 ### Preview
 
-<center>
-    <img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/login.jpg"  /><img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/index.jpg"  />
-</center>
-
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/rank.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/statistics.jpg" />
-</figure>
-</center>
-
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/record.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/library.jpg" />
-</figure>
-</center>
-
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/librarydetail.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/studying.jpg" />
-</figure>
-</center>
-
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/plan.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/personalcenter.jpg" />
-</figure>
-</center>
-
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/note.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/editinfo.jpg" />
-</figure>
-</center>
-
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/feedback.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/setting.jpg" />
-</figure>
-</center>
+![](picture/pa1.png)
+![](picture/pa2.png)
 
 ### License
 
