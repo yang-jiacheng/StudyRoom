@@ -40,4 +40,4 @@ Email：yjc1529425632@gmail.com
 
 ### License
 
-StudyRoom is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/yang-jiacheng/selfstudy-server/blob/master/LICENSE) for the full license text.
+StudyRoom is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/yang-jiacheng/StudyRoom/blob/master/LICENSE) for the full license text.
