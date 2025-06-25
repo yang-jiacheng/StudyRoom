@@ -31,26 +31,13 @@ https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/stud
 ![](picture/pa1.png)
 ![](picture/pa2.png)
 
-### License
-
-```license
-Copyright 2024 jiacheng yang.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
-
+### Contact Me
 For any inquiries, please contact: jiacheng yang
 
-WeChat: crushed_whiskey
+WeChat：crushed_whiskey
 
-Email: yjc1529425632@gmail.com
+Email：yjc1529425632@gmail.com
+
+### License
+
+StudyRoom is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/yang-jiacheng/selfstudy-server/blob/master/LICENSE) for the full license text.
