@@ -14,16 +14,22 @@ This project is for learning purposes only.
 
 ### Project Links
 
-| 平台     | selfstudy-server（Backend）                   | StudyRoom（Android）              |
-|--------| ------------------------------------------ | ----------------------------------- |
-| github | https://github.com/yang-jiacheng/selfstudy-server | https://github.com/yang-jiacheng/StudyRoom |
-
-
+- **Server:** https://github.com/yang-jiacheng/selfstudy-server
+- **Background management:** https://github.com/yang-jiacheng/studyroom-admin-web
+- **Android client:** https://github.com/yang-jiacheng/StudyRoom
 
 
 ### Download the APK 
 
-https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk
+Admin Backend：http://115.29.185.30/selfStudyAdmin/login
+
+Demo account: administrator：yjc123/123456; Other role：xiuyu123/123456
+
+Android Client: https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk
+
+Demo account: 17508660924/123456
+
+Due to the restriction of Aliyun SMS service, individual developers cannot apply for SMS signature, so please use the password to log in.
 
 
 ### Preview
