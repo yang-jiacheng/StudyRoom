@@ -71,15 +71,15 @@ object DESUtil {
 }
 
 fun main() {
-    val text = "4f1499ea2f,Cu3KsAxAOv,c4ce45bb-32a5-4dcc-82c1-4dd61a74c133,84420889-902d-425e-b938-99290ff1c4cd"
-    val textP = "yJZoKH2SHz4G08O1itQ3cfxHtB21/1jQ0AZGNMxib8k/p7bp5bYnBFUIdi26Q8W7xKRgLKaVOYniySbT7QrZrOd7XKkL8ut1eGgqSW3D9gxgT8HNjJozlAeRXMWeLAoz"
-    val a = DESUtil.decode("yJZoKH2SHz4G08O1itQ3cfxHtB21/1jQ0AZGNMxib8k/p7bp5bYnBFUIdi26Q8W7xKRgLKaVOYniySbT7QrZrOd7XKkL8ut1eGgqSW3D9gxgT8HNjJozlAeRXMWeLAoz")
-    val b = DESUtil.encode("4f1499ea2f,Cu3KsAxAOv,c4ce45bb-32a5-4dcc-82c1-4dd61a74c133,84420889-902d-425e-b938-99290ff1c4cd")
-    println(a)
-    println(b)
-
-    println(text == a)
-    println(textP == b)
+//    val text = "4f1499ea2f,Cu3KsAxAOv,c4ce45bb-32a5-4dcc-82c1-4dd61a74c133,84420889-902d-425e-b938-99290ff1c4cd"
+//    val textP = "yJZoKH2SHz4G08O1itQ3cfxHtB21/1jQ0AZGNMxib8k/p7bp5bYnBFUIdi26Q8W7xKRgLKaVOYniySbT7QrZrOd7XKkL8ut1eGgqSW3D9gxgT8HNjJozlAeRXMWeLAoz"
+//    val a = DESUtil.decode("yJZoKH2SHz4G08O1itQ3cfxHtB21/1jQ0AZGNMxib8k/p7bp5bYnBFUIdi26Q8W7xKRgLKaVOYniySbT7QrZrOd7XKkL8ut1eGgqSW3D9gxgT8HNjJozlAeRXMWeLAoz")
+//    val b = DESUtil.encode("4f1499ea2f,Cu3KsAxAOv,c4ce45bb-32a5-4dcc-82c1-4dd61a74c133,84420889-902d-425e-b938-99290ff1c4cd")
+//    println(a)
+//    println(b)
+//
+//    println(text == a)
+//    println(textP == b)
 }
 
 

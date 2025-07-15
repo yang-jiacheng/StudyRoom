@@ -14,86 +14,36 @@ This project is for learning purposes only.
 
 ### Project Links
 
-| 平台     | selfstudy-server（Backend）                   | StudyRoom（Android）              |
-|--------| ------------------------------------------ | ----------------------------------- |
-| github | https://github.com/yang-jiacheng/selfstudy-server | https://github.com/yang-jiacheng/StudyRoom |
+- **Server:** https://github.com/yang-jiacheng/selfstudy-server
+- **Background management:** https://github.com/yang-jiacheng/studyroom-admin-web
+- **Android client:** https://github.com/yang-jiacheng/StudyRoom
 
 
+### Download the APK 
 
+Admin Backend：http://115.29.185.30/studyRoomAdminWeb/#/
 
-### Download the APK
+Demo account: administrator：yjc123/123456; Other role：xiuyu123/123456
 
-[https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk](DOWNLOAD)
+Android Client: https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk
+
+Demo account: 17508660924/123456
+
+Due to the restriction of Aliyun SMS service, individual developers cannot apply for SMS signature, so please use the password to log in.
 
 
 ### Preview
 
-<center>
-    <img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/login.jpg"  /><img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/index.jpg"  />
-</center>
+![](picture/pa1.png)
+![](picture/pa2.png)
 
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/rank.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/statistics.jpg" />
-</figure>
-</center>
+### Contact Me
+For any inquiries, please contact: jiacheng yang
 
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/record.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/library.jpg" />
-</figure>
-</center>
+WeChat：crushed_whiskey
 
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/librarydetail.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/studying.jpg" />
-</figure>
-</center>
-
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/plan.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/personalcenter.jpg" />
-</figure>
-</center>
-
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/note.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/editinfo.jpg" />
-</figure>
-</center>
-
-<center>
-<figure>
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/feedback.jpg" />
-<img src="https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/presentation/setting.jpg" />
-</figure>
-</center>
+Email：yjc1529425632@gmail.com
 
 ### License
 
-```license
-Copyright 2024 jiacheng yang.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
-
-For any inquiries, please contact: jiacheng yang
-
-WeChat: crushed_whiskey
-
-Email: yjc1529425632@gmail.com
+StudyRoom is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/yang-jiacheng/StudyRoom/blob/master/LICENSE) for the full license text.
