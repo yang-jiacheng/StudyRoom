@@ -12,11 +12,11 @@ import com.hjq.bar.TitleBar
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
 import com.lxy.studyroom.constant.CommonConstant
+import com.lxy.studyroom.databinding.ActivityOtherUserBinding
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.model.User
 import com.lxy.studyroom.ui.personalcenter.UserViewModel
 import com.lxy.studyroom.util.StatusBarUtil
-import kotlinx.android.synthetic.main.activity_other_user.*
 import kotlin.concurrent.thread
 
 /**
@@ -25,8 +25,8 @@ import kotlin.concurrent.thread
 
 class OtherUserActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityOtherUserBinding
     private val userViewModel by lazy { ViewModelProvider(this).get(UserViewModel::class.java) }
-
     private lateinit var user: User
 
     companion object {
@@ -43,7 +43,9 @@ class OtherUserActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         //沉浸式状态栏setContentView之前调用
         StatusBarUtil.immersiveStatusBar(this, Color.TRANSPARENT)
-        setContentView(R.layout.activity_other_user)
+        binding = ActivityOtherUserBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        
         //获取上个页面传来的用户id
         val userId = intent.getIntExtra("user_id", -1)
         //根据用户id获取用户信息
@@ -58,34 +60,34 @@ class OtherUserActivity : BaseActivity() {
                 val address = user.address ?: "未设置地址"
 
                 if (StrUtil.isEmpty(coverPath)){
-                    otherCover.setImageResource(R.drawable.def_cover)
+                    binding.otherCover.setImageResource(R.drawable.def_cover)
                 }else{
-                    Glide.with(this).load(coverPath).into(otherCover)
+                    Glide.with(this).load(coverPath).into(binding.otherCover)
                 }
 
                 if (StrUtil.isEmpty(profilePath)){
-                    otherIcon.setImageResource(R.drawable.def_path)
+                    binding.otherIcon.setImageResource(R.drawable.def_path)
                 }else{
-                    Glide.with(this).load(profilePath).into(otherIcon)
+                    Glide.with(this).load(profilePath).into(binding.otherIcon)
                 }
 
-                otherName.text = user.name
-                otherPhone.text = user.phone
-                otherAddress.text = address
-                otherGender.text = user.gender
+                binding.otherName.text = user.name
+                binding.otherPhone.text = user.phone
+                binding.otherAddress.text = address
+                binding.otherGender.text = user.gender
                 val time = "${user.createTime.substring(0,10)} 加入"
-                otherCreateTime.text = time
+                binding.otherCreateTime.text = time
 
             }else{
                 "获取用户信息失败，请重试".toast()
             }
-            otherRefresh.isRefreshing = false
+            binding.otherRefresh.isRefreshing = false
         }
 
         //设置刷新组件的颜色
-        otherRefresh.setColorSchemeResources(R.color.colorPrimary)
+        binding.otherRefresh.setColorSchemeResources(R.color.colorPrimary)
         //下拉刷新监听
-        otherRefresh.setOnRefreshListener{
+        binding.otherRefresh.setOnRefreshListener{
             thread{
                 //线程睡眠1秒给用户加载数据的视觉体验
                 Thread.sleep(1000)
@@ -97,14 +99,14 @@ class OtherUserActivity : BaseActivity() {
         }
 
         //TitleBar点击事件
-        otherTitleBar.setOnTitleBarListener(object : OnTitleBarListener {
+        binding.otherTitleBar.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onLeftClick(titleBar: TitleBar?) {
                 onBackPressed()
             }
         })
 
         //头像点击事件
-        otherCover.setOnClickListener {
+        binding.otherCover.setOnClickListener {
             //判断user初始化
             if (!::user.isInitialized){
                 return@setOnClickListener
@@ -119,7 +121,7 @@ class OtherUserActivity : BaseActivity() {
             getImagePreview(cover)
         }
 
-        otherIcon.setOnClickListener {
+        binding.otherIcon.setOnClickListener {
             if (!::user.isInitialized){
                 return@setOnClickListener
             }
@@ -131,8 +133,5 @@ class OtherUserActivity : BaseActivity() {
             }
             getImagePreview(icon)
         }
-
-
     }
-
 }

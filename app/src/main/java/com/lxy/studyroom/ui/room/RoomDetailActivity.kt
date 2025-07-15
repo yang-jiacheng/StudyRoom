@@ -18,28 +18,23 @@ import cn.hutool.core.util.StrUtil
 import com.blankj.utilcode.util.KeyboardUtils
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
+import com.lxy.studyroom.databinding.ActivityRoomDetailBinding
+import com.lxy.studyroom.databinding.DialogStartStudyBinding
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.dto.StudyRecordDTO
 import com.lxy.studyroom.logic.model.RoomRecord
 import com.lxy.studyroom.logic.model.StudyRecord
 import com.lxy.studyroom.util.LogUtil
-import kotlinx.android.synthetic.main.activity_room_detail.*
-import kotlinx.android.synthetic.main.dialog_start_study.view.*
 
 class RoomDetailActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityRoomDetailBinding
     private val roomViewModel by lazy { ViewModelProvider(this).get(LibraryRoomViewModel::class.java) }
-
     private lateinit var roomRecord: RoomRecord
-
     private lateinit var roomName: String
-
     private var roomId: Int = 0
-
     private var libraryId: Int = 0
-
     private val records = ArrayList<StudyRecord>()
-
     private lateinit var detailDialog: AlertDialog
 
     companion object {
@@ -55,7 +50,8 @@ class RoomDetailActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_room_detail)
+        binding = ActivityRoomDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         roomId = intent.getIntExtra("room_id",0)
         libraryId = intent.getIntExtra("library_id",0)
@@ -63,16 +59,16 @@ class RoomDetailActivity : BaseActivity() {
         //加载
         showDianDianLoading()
         //RecyclerView
-        roomDetRecyclerView.layoutManager = GridLayoutManager(this,2)
+        binding.roomDetRecyclerView.layoutManager = GridLayoutManager(this,2)
         val adapter = StudyRecordAdapter(this, records)
-        roomDetRecyclerView.adapter = adapter
+        binding.roomDetRecyclerView.adapter = adapter
         //RecyclerView分割线
         val decoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         decoration.setDrawable(ContextCompat.getDrawable(this,R.drawable.ic_h_line)!!)
         val decoration2 = DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL)
         decoration2.setDrawable(ContextCompat.getDrawable(this,R.drawable.ic_v_line)!!)
-        roomDetRecyclerView.addItemDecoration(decoration2)
-        roomDetRecyclerView.addItemDecoration(decoration)
+        binding.roomDetRecyclerView.addItemDecoration(decoration2)
+        binding.roomDetRecyclerView.addItemDecoration(decoration)
 
         //监听事件
         setListener(adapter)
@@ -89,7 +85,7 @@ class RoomDetailActivity : BaseActivity() {
     }
 
     private fun setListener(adapter: StudyRecordAdapter) {
-        roomDetBack.setOnClickListener {
+        binding.roomDetBack.setOnClickListener {
             onBackPressed()
         }
         //RecyclerView点击事件
@@ -103,9 +99,7 @@ class RoomDetailActivity : BaseActivity() {
                     //有人在
                     StudyActivity.actionStart(this@RoomDetailActivity,record.id,roomName,false)
                 }
-
             }
-
         })
     }
 
@@ -119,7 +113,6 @@ class RoomDetailActivity : BaseActivity() {
             }
             destroyDianDianLoading()
         }
-
     }
 
     private fun observeStartStudy(){
@@ -144,7 +137,7 @@ class RoomDetailActivity : BaseActivity() {
         roomName = room.name
         val title = room.libraryName + room.parentName + room.name
         val count = room.personCount
-        roomDetTitle.text = title
+        binding.roomDetTitle.text = title
         if (CollUtil.isNotEmpty(roomRecord.records)){
             val haveRecords = roomRecord.records!!
             //所有记录的map
@@ -192,53 +185,54 @@ class RoomDetailActivity : BaseActivity() {
         detailDialog.setCancelable(true)
         detailDialog.setCanceledOnTouchOutside(false)
 
-        val view = View.inflate(this,R.layout.dialog_start_study,null)
+        val dialogBinding = DialogStartStudyBinding.inflate(layoutInflater)
 
-        detailDialog.setView(view)
+        detailDialog.setView(dialogBinding.root)
         if (detailDialog.window != null) {
             detailDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
-        view.diaStStClose.setOnClickListener {
+
+        dialogBinding.diaStStClose.setOnClickListener {
             hideLibraryDetail()
         }
 
-        view.diaStStCountdown.setOnClickListener {
-            view.diaStStCountdown.background = resources.getDrawable(R.drawable.bg_countdown_type)
-            view.diaStStCountdown.setTextColor(resources.getColor(R.color.white))
+        dialogBinding.diaStStCountdown.setOnClickListener {
+            dialogBinding.diaStStCountdown.background = resources.getDrawable(R.drawable.bg_countdown_type)
+            dialogBinding.diaStStCountdown.setTextColor(resources.getColor(R.color.white))
 
-            view.diaStStPositiveTime.background = resources.getDrawable(R.color.colorBody)
-            view.diaStStPositiveTime.setTextColor(resources.getColor(R.color.colorPrimary))
+            dialogBinding.diaStStPositiveTime.background = resources.getDrawable(R.color.colorBody)
+            dialogBinding.diaStStPositiveTime.setTextColor(resources.getColor(R.color.colorPrimary))
 
-            view.imgPositiveTime.visibility = View.GONE
-            view.studyTime.visibility = View.VISIBLE
-            view.diaStStCount.visibility = View.VISIBLE
+            dialogBinding.imgPositiveTime.visibility = View.GONE
+            dialogBinding.studyTime.visibility = View.VISIBLE
+            dialogBinding.diaStStCount.visibility = View.VISIBLE
         }
 
-        view.diaStStPositiveTime.setOnClickListener {
-            view.diaStStPositiveTime.background = resources.getDrawable(R.drawable.bg_countdown_type)
-            view.diaStStPositiveTime.setTextColor(resources.getColor(R.color.white))
+        dialogBinding.diaStStPositiveTime.setOnClickListener {
+            dialogBinding.diaStStPositiveTime.background = resources.getDrawable(R.drawable.bg_countdown_type)
+            dialogBinding.diaStStPositiveTime.setTextColor(resources.getColor(R.color.white))
 
-            view.diaStStCountdown.background = resources.getDrawable(R.color.colorBody)
-            view.diaStStCountdown.setTextColor(resources.getColor(R.color.colorPrimary))
+            dialogBinding.diaStStCountdown.background = resources.getDrawable(R.color.colorBody)
+            dialogBinding.diaStStCountdown.setTextColor(resources.getColor(R.color.colorPrimary))
 
-            view.imgPositiveTime.visibility = View.VISIBLE
-            view.studyTime.visibility = View.GONE
-            view.diaStStCount.visibility = View.GONE
+            dialogBinding.imgPositiveTime.visibility = View.VISIBLE
+            dialogBinding.studyTime.visibility = View.GONE
+            dialogBinding.diaStStCount.visibility = View.GONE
         }
 
-        view.diaStStStart.setOnClickListener {
-            KeyboardUtils.hideSoftInput(view)
+        dialogBinding.diaStStStart.setOnClickListener {
+            KeyboardUtils.hideSoftInput(this)
             val studyRecordDTO = StudyRecordDTO(roomId,"",record.seat,0,null)
 
             //自习标签
-            val tag = view.diaStStStudyTag.text.toString()
+            val tag = dialogBinding.diaStStStudyTag.text.toString()
             if (StrUtil.isBlank(tag)){
                 "请输入自习标签".toast()
                 return@setOnClickListener
             }
             studyRecordDTO.tag = tag
 
-            val flag = view.diaStStCountdown.currentTextColor == resources.getColor(R.color.white)
+            val flag = dialogBinding.diaStStCountdown.currentTextColor == resources.getColor(R.color.white)
             //计时方式
             var timingMode: Int = 1
             if (flag){
@@ -246,7 +240,7 @@ class RoomDetailActivity : BaseActivity() {
             }
             studyRecordDTO.timingMode = timingMode
             if (timingMode == 2){
-                val diaStStCount = view.diaStStCount.editableText.toString()
+                val diaStStCount = dialogBinding.diaStStCount.editableText.toString()
                 if (StrUtil.isBlank(diaStStCount)){
                     "请输入自习时长".toast()
                     return@setOnClickListener
@@ -256,7 +250,6 @@ class RoomDetailActivity : BaseActivity() {
             //开始自习
             roomViewModel.startStudy(studyRecordDTO)
         }
-
 
         detailDialog.show()
     }
@@ -268,5 +261,4 @@ class RoomDetailActivity : BaseActivity() {
             }
         }
     }
-
 }

@@ -11,6 +11,7 @@ import com.blankj.utilcode.util.KeyboardUtils
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
 import com.lxy.studyroom.constant.CommonConstant
+import com.lxy.studyroom.databinding.ActivityLoginPasswordBinding
 import com.lxy.studyroom.enums.ResponseEnum
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.Repository
@@ -18,11 +19,12 @@ import com.lxy.studyroom.ui.main.MainActivity
 import com.lxy.studyroom.ui.policy.PolicyWebViewActivity
 import com.lxy.studyroom.util.EncryptUtil
 import com.lxy.studyroom.util.LogUtil
-import kotlinx.android.synthetic.main.activity_login_password.*
 
 class LoginPasswordActivity : BaseActivity() {
 
-    private val tokenViewModel by lazy { ViewModelProvider(this).get(TokenViewModel::class.java) }
+    private lateinit var binding: ActivityLoginPasswordBinding
+
+    private val tokenViewModel by lazy { ViewModelProvider(this)[TokenViewModel::class.java] }
 
     companion object {
         @JvmStatic
@@ -34,15 +36,18 @@ class LoginPasswordActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityLoginPasswordBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         //用户协议是否已选中
         val agreePolicy = Repository.getAgreePolicy()
         //用户手机号
         val userPhone = Repository.getUserPhone()
         setContentView(R.layout.activity_login_password)
         if (StrUtil.isNotEmpty(userPhone)){
-            tpMobile.setText(userPhone)
+            binding.tpMobile.setText(userPhone)
         }
-        checkboxTp.isChecked = agreePolicy
+        binding.checkboxTp.isChecked = agreePolicy
         //监听事件
         setListener()
         //观察数据事件
@@ -51,8 +56,8 @@ class LoginPasswordActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        setTextColor(tpUserProtocol,R.color.colorPrimary)
-        setTextColor(tpUserPolicy,R.color.colorPrimary)
+        setTextColor(binding.tpUserProtocol,R.color.colorPrimary)
+        setTextColor(binding.tpUserPolicy,R.color.colorPrimary)
     }
 
     override fun onBackPressed(){
@@ -65,45 +70,45 @@ class LoginPasswordActivity : BaseActivity() {
     @SuppressLint("ClickableViewAccessibility")
     private fun setListener(){
         //监听手机号输入框
-        textChanges(tpMobile,500){phone: String? ->
-            accountTpLayout.error = ""
+        textChanges(binding.tpMobile,500){phone: String? ->
+            binding.accountTpLayout.error = ""
             if (!PhoneUtil.isMobile(phone)){
-                accountTpLayout.error = "请输入正确格式的手机号"
+                binding.accountTpLayout.error = "请输入正确格式的手机号"
             }
         }
         //监听密码输入框
-        textChanges(tpPassword,500){password: String ->
-            tpPasswordLayout.error = ""
+        textChanges(binding.tpPassword,500){password: String ->
+            binding.tpPasswordLayout.error = ""
             if (StrUtil.isBlank(password)){
-                tpPasswordLayout.error = "请输入密码"
+                binding.tpPasswordLayout.error = "请输入密码"
             }else{
                 if (password.length !in 6..16){
-                    tpPasswordLayout.error = "密码长度在6-16位之间"
+                    binding.tpPasswordLayout.error = "密码长度在6-16位之间"
                 }
             }
         }
         //返回
-        tpBack.setOnClickListener {
+        binding.tpBack.setOnClickListener {
             goBack()
         }
         //忘记密码
-        tpForgetPassword.setOnClickListener {
+        binding.tpForgetPassword.setOnClickListener {
             ForgetPasswordActivity.actionStart(this)
         }
         //登录
-        tpbtnLogin.setOnClickListener {
+        binding.tpbtnLogin.setOnClickListener {
             loginByPassword()
         }
         //用户协议
-        tpUserProtocol.setOnClickListener {
+        binding.tpUserProtocol.setOnClickListener {
             LogUtil.e("LoginPasswordActivity 用户协议", CommonConstant.AGREEMENT)
-            setTextColor(tpUserProtocol,R.color.colorTheme)
+            setTextColor(binding.tpUserProtocol,R.color.colorTheme)
             PolicyWebViewActivity.actionStart(this,"用户协议", CommonConstant.AGREEMENT)
         }
         //隐私政策
-        tpUserPolicy.setOnClickListener {
+        binding.tpUserPolicy.setOnClickListener {
             LogUtil.e("LoginPasswordActivity 用户协议", CommonConstant.POLICY)
-            setTextColor(tpUserPolicy,R.color.colorTheme)
+            setTextColor(binding.tpUserPolicy,R.color.colorTheme)
             PolicyWebViewActivity.actionStart(this,"隐私政策", CommonConstant.POLICY)
         }
 
@@ -115,28 +120,28 @@ class LoginPasswordActivity : BaseActivity() {
     }
 
     private fun loginByPassword(){
-        val phone = tpMobile.text.toString()
-        var password = tpPassword.text.toString()
+        val phone = binding.tpMobile.text.toString()
+        var password = binding.tpPassword.text.toString()
         KeyboardUtils.hideSoftInput(this)
         if (!PhoneUtil.isMobile(phone)){
             val msg = "请输入正确格式的手机号"
-            accountTpLayout.error = msg
+            binding.accountTpLayout.error = msg
             msg.toast()
             return
         }
         if (StrUtil.isBlank(password)){
             val msg = "请输入密码"
-            tpPasswordLayout.error = msg
+            binding.tpPasswordLayout.error = msg
             msg.toast()
             return
         }
         if (password.length !in 6..16){
             val msg = "密码长度在6-16位之间"
-            tpPasswordLayout.error = msg
+            binding.tpPasswordLayout.error = msg
             msg.toast()
             return
         }
-        if (!checkboxTp.isChecked) {
+        if (!binding.checkboxTp.isChecked) {
             "请确认已阅读服务协议与隐私政策".toast()
             return
         }

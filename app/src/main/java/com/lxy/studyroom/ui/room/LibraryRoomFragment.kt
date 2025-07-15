@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.lxy.studyroom.BaseFragment
 import com.lxy.studyroom.R
+import com.lxy.studyroom.databinding.FragmentLibraryRoomBinding
 import com.lxy.studyroom.logic.model.RoomDetail
-import kotlinx.android.synthetic.main.fragment_library_room.*
 
 
 class LibraryRoomFragment : BaseFragment() {
@@ -17,6 +17,8 @@ class LibraryRoomFragment : BaseFragment() {
     private val ARG_PARAM1 = "param1"
 
     private lateinit var roomsList: ArrayList<RoomDetail>
+    private var _binding: FragmentLibraryRoomBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,17 +31,23 @@ class LibraryRoomFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_library_room, container, false)
+        _binding = FragmentLibraryRoomBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        FlroomRecyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+        binding.FlroomRecyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         val adapter = LibraryAreaAdapter(requireContext(), roomsList)
-        FlroomRecyclerView.adapter = adapter
+        binding.FlroomRecyclerView.adapter = adapter
 
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

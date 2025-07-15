@@ -12,24 +12,20 @@ import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
+import com.lxy.studyroom.databinding.ActivityFeedbackBinding
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.model.Feedback
 import com.lxy.studyroom.util.LogUtil
-import kotlinx.android.synthetic.main.activity_feedback.*
 import kotlin.concurrent.thread
 
 class FeedbackActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityFeedbackBinding
     private val viewModel by lazy { ViewModelProvider(this).get(FeedbackViewModel::class.java) }
-
     private val feedList = ArrayList<Feedback>()
-
     private lateinit var feedbackDetail: Feedback
-
     private var page = 1
-
     private var limit = 12
-
     private var mine = 0
 
     companion object {
@@ -42,16 +38,16 @@ class FeedbackActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_feedback)
+        binding = ActivityFeedbackBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         mine = 0
 
         showDianDianLoading()
 
-
         //RecyclerView
-        feedRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.feedRecyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = UserFeedbackAdapter(this,feedList)
-        feedRecyclerView.adapter = adapter
+        binding.feedRecyclerView.adapter = adapter
         setScrollNextPage(adapter)
         setEvent()
         observeData(adapter)
@@ -63,57 +59,54 @@ class FeedbackActivity : BaseActivity() {
                 viewModel.getFeedBackList(page,limit,mine)
             }
         }
-
     }
-
-
 
     override fun onRestart() {
         super.onRestart()
-        feedAllBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.colorPrimary))
-        feedMineBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.primary_text_color))
+        binding.feedAllBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.colorPrimary))
+        binding.feedMineBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.primary_text_color))
         page = 1
         mine = 0
-        feedRecyclerView.smoothScrollToPosition(0)
+        binding.feedRecyclerView.smoothScrollToPosition(0)
         viewModel.getFeedBackList(page,limit, mine)
     }
 
     private fun setEvent() {
         //标题栏
-        feedTitleBar.setOnTitleBarListener(object :OnTitleBarListener{
+        binding.feedTitleBar.setOnTitleBarListener(object :OnTitleBarListener{
             override fun onLeftClick(titleBar: TitleBar?) {
                 onBackPressed()
             }
             override fun onTitleClick(titleBar: TitleBar?) {
-                feedRecyclerView.smoothScrollToPosition(0)
+                binding.feedRecyclerView.smoothScrollToPosition(0)
             }
         })
         //全部反馈
-        feedAllBtn.setOnClickListener {
-            feedAllBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.colorPrimary))
-            feedMineBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.primary_text_color))
+        binding.feedAllBtn.setOnClickListener {
+            binding.feedAllBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.colorPrimary))
+            binding.feedMineBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.primary_text_color))
             page = 1
             mine = 0
-            feedRecyclerView.smoothScrollToPosition(0)
+            binding.feedRecyclerView.smoothScrollToPosition(0)
             viewModel.getFeedBackList(page,limit,mine)
         }
         //我的反馈
-        feedMineBtn.setOnClickListener {
-            feedMineBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.colorPrimary))
-            feedAllBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.primary_text_color))
+        binding.feedMineBtn.setOnClickListener {
+            binding.feedMineBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.colorPrimary))
+            binding.feedAllBtn.setTextColor(ContextCompat.getColor(this@FeedbackActivity,R.color.primary_text_color))
             page = 1
             mine = 1
-            feedRecyclerView.smoothScrollToPosition(0)
+            binding.feedRecyclerView.smoothScrollToPosition(0)
             viewModel.getFeedBackList(page,limit,mine)
         }
 
-        feedAddBtn.setOnClickListener {
+        binding.feedAddBtn.setOnClickListener {
             EditFeedbackActivity.actionStart(this)
         }
     }
 
     private fun setScrollNextPage(adapter: UserFeedbackAdapter) {
-        feedRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+        binding.feedRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val layoutManager = recyclerView.layoutManager
                 val manager: LinearLayoutManager = layoutManager as LinearLayoutManager
@@ -156,14 +149,11 @@ class FeedbackActivity : BaseActivity() {
             }else{
                 adapter.notifyItemRangeChanged(oldPos,feedList.size)
                 if (oldPos > 0 && feedList.size > oldPos){
-                    feedRecyclerView.scrollToPosition(oldPos+1)
+                    binding.feedRecyclerView.scrollToPosition(oldPos+1)
                 }
             }
 
             destroyDianDianLoading()
-
         }
     }
-
-
 }

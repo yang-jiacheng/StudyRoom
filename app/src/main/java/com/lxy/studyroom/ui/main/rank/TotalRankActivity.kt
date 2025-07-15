@@ -15,25 +15,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
+import com.lxy.studyroom.databinding.ActivityTotalRankBinding
+import com.lxy.studyroom.databinding.DialogRuleBinding
 import com.lxy.studyroom.enums.ResponseEnum
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.model.UserRank
 import com.lxy.studyroom.util.CommonUtil
 import com.lxy.studyroom.util.StatusBarUtil
-import kotlinx.android.synthetic.main.activity_total_rank.*
-import kotlinx.android.synthetic.main.dialog_rule.view.*
-import kotlinx.android.synthetic.main.fragment_rank.*
 
 class TotalRankActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityTotalRankBinding
     private val rankViewModel by lazy { ViewModelProvider(this).get(RankViewModel::class.java) }
-
     private lateinit var ruleDialog: AlertDialog
-
     private val tabList = listOf("总榜")
-
     private val fragmentList = ArrayList<RankFragment>()
-
     private var rule: String = ""
 
     companion object {
@@ -48,27 +44,28 @@ class TotalRankActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         //沉浸式状态栏
         StatusBarUtil.setStatusBarTextColor(this, Color.TRANSPARENT)
-        setContentView(R.layout.activity_total_rank)
+        binding = ActivityTotalRankBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(aToRaToolbar)
-        aToRaBar.outlineProvider = null
-        aToRaCollBar.outlineProvider = ViewOutlineProvider.BOUNDS
+        setSupportActionBar(binding.aToRaToolbar)
+        binding.aToRaBar.outlineProvider = null
+        binding.aToRaCollBar.outlineProvider = ViewOutlineProvider.BOUNDS
         //加载
         showDianDianLoading()
 
         //RecyclerView
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        aToRa_tab.layoutManager = layoutManager
+        binding.aToRaTab.layoutManager = layoutManager
         val tabAdapter = RankTabAdapter(tabList)
-        aToRa_tab.adapter = tabAdapter
+        binding.aToRaTab.adapter = tabAdapter
         //RecyclerView分割线
         val decoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        aToRa_tab.addItemDecoration(decoration)
+        binding.aToRaTab.addItemDecoration(decoration)
 
         //viewPager
         val fragmentAdapter = RankFragmentAdapter(supportFragmentManager,fragmentList)
-        aToRa_pager.adapter = fragmentAdapter
+        binding.aToRaPager.adapter = fragmentAdapter
 
         //获取排行榜和规则
         rankViewModel.getRankAndRule(CommonUtil.getRandomCode())
@@ -79,12 +76,12 @@ class TotalRankActivity : BaseActivity() {
     }
 
     private fun setEvent(tabAdapter: RankTabAdapter) {
-        aToRaBack.setOnClickListener {
+        binding.aToRaBack.setOnClickListener {
             finish()
         }
 
         //排行榜更新规则 AlertDialog
-        aToRaQues.setOnClickListener {
+        binding.aToRaQues.setOnClickListener {
             showRuleDialog()
         }
 
@@ -95,12 +92,12 @@ class TotalRankActivity : BaseActivity() {
                 tabAdapter.curr = position
                 tabAdapter.notifyDataSetChanged()
                 //更改viewPager当前定位
-                aToRa_pager.currentItem = position
+                binding.aToRaPager.currentItem = position
             }
         })
 
         //监听更改viewPager当前定位
-        aToRa_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+        binding.aToRaPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
@@ -110,8 +107,6 @@ class TotalRankActivity : BaseActivity() {
 
             override fun onPageScrollStateChanged(state: Int) {}
         })
-
-
     }
 
     private fun observeRankData(tabAdapter: RankTabAdapter,fragmentAdapter: RankFragmentAdapter){
@@ -144,19 +139,17 @@ class TotalRankActivity : BaseActivity() {
             setCancelable(true)
             setCanceledOnTouchOutside(false)
         }
-        val view = View.inflate(this@TotalRankActivity,R.layout.dialog_rule,null)
-        view.dia_rule.setText(rule)
+        val dialogBinding = DialogRuleBinding.inflate(layoutInflater)
+        dialogBinding.diaRule.setText(rule)
 
-        view.dia_btn.setOnClickListener {
+        dialogBinding.diaBtn.setOnClickListener {
             destroyRuleDialog()
         }
 
-        ruleDialog.setView(view)
+        ruleDialog.setView(dialogBinding.root)
         //设置透明背景
         ruleDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         ruleDialog.show()
-
-
     }
 
     /**
@@ -169,6 +162,4 @@ class TotalRankActivity : BaseActivity() {
             }
         }
     }
-
-
 }

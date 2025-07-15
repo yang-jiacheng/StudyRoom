@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.webkit.WebViewClient
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
-import kotlinx.android.synthetic.main.activity_policy_web_view.*
+import com.lxy.studyroom.databinding.ActivityPolicyWebViewBinding
 
 class PolicyWebViewActivity : BaseActivity() {
+
+    private lateinit var binding: ActivityPolicyWebViewBinding
 
     companion object {
         @JvmStatic
@@ -23,25 +25,24 @@ class PolicyWebViewActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityPolicyWebViewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        
         val title = intent.getStringExtra("title")
         val url = intent.getStringExtra("url")
-        setContentView(R.layout.activity_policy_web_view)
-        diaStStName.text = title
+        
+        binding.diaStStName.text = title
 
-        ivBack.setOnClickListener {
+        binding.ivBack.setOnClickListener {
             finish()
         }
 
-        webViewPro.settings.javaScriptEnabled = false
-        webViewPro.webViewClient = WebViewClient()
-        webViewPro.loadUrl(url!!)
-
-
+        binding.webViewPro.settings.javaScriptEnabled = false
+        binding.webViewPro.webViewClient = WebViewClient()
+        binding.webViewPro.loadUrl(url!!)
     }
 
     override fun onBackPressed() {
         finish()
     }
-
-
 }

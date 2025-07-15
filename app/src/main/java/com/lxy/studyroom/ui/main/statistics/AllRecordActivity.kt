@@ -12,26 +12,21 @@ import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
+import com.lxy.studyroom.databinding.ActivityAllRecordBinding
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.model.StudyRecord
 import com.lxy.studyroom.ui.room.StudyRecordViewModel
 import com.lxy.studyroom.util.LogUtil
-import kotlinx.android.synthetic.main.activity_all_record.*
 import kotlin.concurrent.thread
 
 class AllRecordActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityAllRecordBinding
     private val studyRecordViewModel by lazy { ViewModelProvider(this).get(StudyRecordViewModel::class.java) }
-
     private var records = ArrayList<StudyRecord>()
-
     private var page = 1
-
     private var limit = 12
-
     private var lastItemPosition = 0
-
-
 
     companion object {
         @JvmStatic
@@ -43,18 +38,20 @@ class AllRecordActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_all_record)
+        binding = ActivityAllRecordBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        
         //RecyclerView
-        allRecordRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.allRecordRecyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = UserRecordAdapter(this,records)
-        allRecordRecyclerView.adapter = adapter
+        binding.allRecordRecyclerView.adapter = adapter
         setScrollNextPage(adapter)
 
         //监听事件
         setEvent()
         //下拉刷新
-        allRecordRefresh.setColorSchemeResources(R.color.colorPrimary)
-        allRecordRefresh.setOnRefreshListener {
+        binding.allRecordRefresh.setColorSchemeResources(R.color.colorPrimary)
+        binding.allRecordRefresh.setOnRefreshListener {
             thread {
                 Thread.sleep(1000)
                 runOnUiThread{
@@ -74,18 +71,17 @@ class AllRecordActivity : BaseActivity() {
                 studyRecordViewModel.getStudyRecord(page, limit)
             }
         }
-
     }
 
     private fun setEvent() {
         //TitleBar点击事件
-        allRecordTitleBar.setOnTitleBarListener(object : OnTitleBarListener{
+        binding.allRecordTitleBar.setOnTitleBarListener(object : OnTitleBarListener{
             override fun onLeftClick(titleBar: TitleBar?) {
                 onBackPressed()
             }
 
             override fun onTitleClick(titleBar: TitleBar?) {
-                allRecordRecyclerView.smoothScrollToPosition(0)
+                binding.allRecordRecyclerView.smoothScrollToPosition(0)
             }
         })
     }
@@ -119,23 +115,22 @@ class AllRecordActivity : BaseActivity() {
                 adapter.notifyItemRangeChanged(oldPos,records.size)
                 if (oldPos > 0 && records.size > oldPos){
                     //scrollToPosition  smoothScrollToPosition
-                    allRecordRecyclerView.scrollToPosition(oldPos+1)
+                    binding.allRecordRecyclerView.scrollToPosition(oldPos+1)
                 }
             }
 
             destroyDianDianLoading()
-            allRecordRefresh.isRefreshing = false
+            binding.allRecordRefresh.isRefreshing = false
         }
-
     }
 
     private fun setScrollNextPage(adapter: UserRecordAdapter){
-        allRecordRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.allRecordRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 //未滚动且当前定位是最后一个
 //                if (newState == SCROLL_STATE_IDLE && lastItemPosition == adapter.itemCount){
 //                    //已经滚动到底部
-//                    if (!allRecordRecyclerView.canScrollVertically(1)){
+//                    if (!binding.allRecordRecyclerView.canScrollVertically(1)){
 //                        page ++
 //                        studyRecordViewModel.getStudyRecord(page, limit)
 //                    }
@@ -156,6 +151,4 @@ class AllRecordActivity : BaseActivity() {
             }
         })
     }
-
-
 }

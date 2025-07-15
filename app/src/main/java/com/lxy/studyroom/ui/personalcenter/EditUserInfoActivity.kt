@@ -23,6 +23,7 @@ import com.luck.picture.lib.interfaces.OnResultCallbackListener
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.BuildConfig
 import com.lxy.studyroom.R
+import com.lxy.studyroom.databinding.ActivityEditUserInfoBinding
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.dto.UserDTO
 import com.lxy.studyroom.logic.model.User
@@ -33,17 +34,14 @@ import com.lxy.studyroom.util.StatusBarUtil
 import com.lxy.studyroom.widget.view.GlideEngine
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropImageEngine
-import kotlinx.android.synthetic.main.activity_edit_user_info.*
 import java.io.File
 
 class EditUserInfoActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityEditUserInfoBinding
     val userViewModel by lazy { ViewModelProvider(this).get(UserViewModel::class.java) }
-
     val uploadViewModel by lazy { ViewModelProvider(this).get(UploadViewModel::class.java) }
-
     private lateinit var userInfo: User
-
     private var userDTO = UserDTO("","","","","","","","")
 
     companion object {
@@ -59,7 +57,8 @@ class EditUserInfoActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         StatusBarUtil.immersiveStatusBar(this, Color.TRANSPARENT)
-        setContentView(R.layout.activity_edit_user_info)
+        binding = ActivityEditUserInfoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         userInfo = intent.getSerializableExtra("user_info") as User
 
@@ -69,31 +68,29 @@ class EditUserInfoActivity : BaseActivity() {
         //点击事件
         setEvent()
 
-
         observeCoverPath()
         observeIconPath()
         observeUpdateUserInfo()
     }
 
-
     private fun setEvent() {
         //TitleBar点击事件
-        upInfoTitleBar.setOnTitleBarListener(object : OnTitleBarListener {
+        binding.upInfoTitleBar.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onLeftClick(titleBar: TitleBar?) {
                 onBackPressed()
             }
         })
 
         //选择地址
-        upInfoAddressLayout.setOnClickListener {
+        binding.upInfoAddressLayout.setOnClickListener {
             addressSelector{ province, city, county ->
                 val address = province.name + city.name + county.name
-                this@EditUserInfoActivity.upInfoAddress.text = address
+                this@EditUserInfoActivity.binding.upInfoAddress.text = address
             }
         }
 
         //选择背景
-        upInfoCover.setOnClickListener {
+        binding.upInfoCover.setOnClickListener {
             pictureSelectorCrop(
                 {file ->
                     "图片上传中...".toast()
@@ -104,7 +101,7 @@ class EditUserInfoActivity : BaseActivity() {
         }
 
         //选择头像
-        upInfoIcon.setOnClickListener {
+        binding.upInfoIcon.setOnClickListener {
             pictureSelectorCrop(
                 {file ->
                     "图片上传中...".toast()
@@ -112,21 +109,18 @@ class EditUserInfoActivity : BaseActivity() {
                     showDianDianLoading()
                 },(1).toFloat(),(1).toFloat(),true
             )
-
         }
 
-        upInfoBtn.setOnClickListener {
-            val name = upInfoName.text.toString()
-            val address = upInfoAddress.text.toString()
-            val gender = findViewById<RadioButton>(upInfoGroup.checkedRadioButtonId).text.toString()
+        binding.upInfoBtn.setOnClickListener {
+            val name = binding.upInfoName.text.toString()
+            val address = binding.upInfoAddress.text.toString()
+            val gender = findViewById<RadioButton>(binding.upInfoGroup.checkedRadioButtonId).text.toString()
             userDTO.name = name
             userDTO.address = address
             userDTO.gender = gender
 
             userViewModel.updateUserInfo(userDTO)
-
         }
-
     }
 
     private fun observeCoverPath(){
@@ -134,7 +128,7 @@ class EditUserInfoActivity : BaseActivity() {
             if (resp.isSuccess()){
                 val data = resp.data!![0]
                 userDTO.coverPath = data
-                Glide.with(this@EditUserInfoActivity).load(BuildConfig.OSS_PREFIX + data).into(upInfoCover)
+                Glide.with(this@EditUserInfoActivity).load(BuildConfig.OSS_PREFIX + data).into(binding.upInfoCover)
             }else{
                 "背景图片上传失败，请重试".toast()
             }
@@ -147,7 +141,7 @@ class EditUserInfoActivity : BaseActivity() {
             if (resp.isSuccess()){
                 val data = resp.data!![0]
                 userDTO.profilePath = data
-                Glide.with(this@EditUserInfoActivity).load(BuildConfig.OSS_PREFIX + data).into(upInfoIcon)
+                Glide.with(this@EditUserInfoActivity).load(BuildConfig.OSS_PREFIX + data).into(binding.upInfoIcon)
             }else{
                 "头像上传失败，请重试".toast()
             }
@@ -177,30 +171,25 @@ class EditUserInfoActivity : BaseActivity() {
         val coverPath = userInfo.coverPath ?: ""
 
         if (StrUtil.isNotBlank(userDTO.name)){
-            upInfoName.setText(userDTO.name)
+            binding.upInfoName.setText(userDTO.name)
         }
         if (StrUtil.isNotBlank(userDTO.address)){
-            upInfoAddress.text = userDTO.address
+            binding.upInfoAddress.text = userDTO.address
         }
         if (StrUtil.isNotEmpty(profilePath)){
-            Glide.with(this@EditUserInfoActivity).load(profilePath).into(upInfoIcon)
+            Glide.with(this@EditUserInfoActivity).load(profilePath).into(binding.upInfoIcon)
             userDTO.profilePath = profilePath.substring(profilePath.indexOf("/upload"))
         }
         if (StrUtil.isNotEmpty(coverPath)){
-            Glide.with(this@EditUserInfoActivity).load(coverPath).into(upInfoCover)
+            Glide.with(this@EditUserInfoActivity).load(coverPath).into(binding.upInfoCover)
             userDTO.coverPath = coverPath.substring(coverPath.indexOf("/upload"))
         }
         if (StrUtil.isNotEmpty(userDTO.gender)){
             if ("男" == userDTO.gender){
-                upInfoNan.isChecked = true
+                binding.upInfoNan.isChecked = true
             }else{
-                upInfoNv.isChecked = true
+                binding.upInfoNv.isChecked = true
             }
         }
-
     }
-
-
-
-
 }

@@ -19,6 +19,7 @@ import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
+import com.lxy.studyroom.databinding.ActivityStudyBinding
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.dto.StudyDurationDTO
 import com.lxy.studyroom.logic.model.StudyRecord
@@ -26,26 +27,19 @@ import com.lxy.studyroom.ui.main.rank.OtherUserActivity
 import com.lxy.studyroom.util.CommonUtil
 import com.lxy.studyroom.util.LogUtil
 import com.lxy.studyroom.util.StatusBarUtil
-import kotlinx.android.synthetic.main.activity_study.*
 import java.util.*
 import kotlin.concurrent.thread
 
 class StudyActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityStudyBinding
     private val roomViewModel by lazy { ViewModelProvider(this).get(LibraryRoomViewModel::class.java) }
-
     private var timer: CountDownTimer? = null
-
     private lateinit var record: StudyRecord
-
     private var recordId: Int = 0
-
     private lateinit var roomName: String
-
     private var flag = false
-
     private var lightFlag = false
-
     private var curr: Int = 0
 
     companion object {
@@ -60,11 +54,11 @@ class StudyActivity : BaseActivity() {
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         StatusBarUtil.immersiveStatusBar(this, Color.TRANSPARENT)
-        setContentView(R.layout.activity_study)
+        binding = ActivityStudyBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         showDianDianLoading()
         recordId = intent.getIntExtra("record_id",0)
         roomName = intent.getStringExtra("room_name").toString()
@@ -72,7 +66,7 @@ class StudyActivity : BaseActivity() {
         //获取记录详情
         roomViewModel.getLearningRecordDetail(recordId)
         //正计时格式
-        acStChronometer.format = "%s"
+        binding.acStChronometer.format = "%s"
         //监听事件
         setEvent()
 
@@ -87,17 +81,16 @@ class StudyActivity : BaseActivity() {
         }else{
             finish()
         }
-
     }
 
     override fun onResume() {
         super.onResume()
-        acStChronometer.start()
+        binding.acStChronometer.start()
     }
 
     override fun onPause() {
         super.onPause()
-        acStChronometer.stop()
+        binding.acStChronometer.stop()
     }
 
     override fun onDestroy() {
@@ -140,7 +133,7 @@ class StudyActivity : BaseActivity() {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun setEvent() {
-        acStTitleBar.setOnTitleBarListener(object : OnTitleBarListener {
+        binding.acStTitleBar.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onLeftClick(titleBar: TitleBar?) {
                 if (flag){
                     stopStudy()
@@ -153,10 +146,10 @@ class StudyActivity : BaseActivity() {
                 if (flag){
                     //开启了屏幕常亮
                     if (lightFlag){
-                        acStTitleBar.rightIcon = resources.getDrawable(R.drawable.ic_lighting_no)
+                        binding.acStTitleBar.rightIcon = resources.getDrawable(R.drawable.ic_lighting_no)
                         window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
                     }else{
-                        acStTitleBar.rightIcon = resources.getDrawable(R.drawable.ic_lighting)
+                        binding.acStTitleBar.rightIcon = resources.getDrawable(R.drawable.ic_lighting)
                         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
                         "屏幕常亮已开启".toast()
                     }
@@ -166,7 +159,7 @@ class StudyActivity : BaseActivity() {
         })
 
         //
-        acStStudyPerson.setOnClickListener {
+        binding.acStStudyPerson.setOnClickListener {
             if (::record.isInitialized){
                 OtherUserActivity.actionStart(this@StudyActivity,record.userId)
             }
@@ -193,13 +186,13 @@ class StudyActivity : BaseActivity() {
     private fun handleData(){
         //座位号
         val seat = record.seat
-        acStTitleBar.title = "${roomName}-${seat}号"
+        binding.acStTitleBar.title = "${roomName}-${seat}号"
         //标签
-        acStTag.text = record.tag
+        binding.acStTag.text = record.tag
         if(flag){
-            acStTitleBar.rightIcon = resources.getDrawable(R.drawable.ic_lighting_no)
+            binding.acStTitleBar.rightIcon = resources.getDrawable(R.drawable.ic_lighting_no)
             //音乐盒展示
-            acStMusic.visibility = View.VISIBLE
+            binding.acStMusic.visibility = View.VISIBLE
         }
         //开始时间
         val startTime = record.startTime
@@ -207,21 +200,19 @@ class StudyActivity : BaseActivity() {
         //计时方式：1正计时 2倒计时
         val timingMode = record.timingMode
         if (timingMode == 1){
-            acStChronometer.visibility = View.VISIBLE
+            binding.acStChronometer.visibility = View.VISIBLE
             //初始化正计时
             initTimer()
         }else{
-            acStTimeCount.visibility = View.VISIBLE
-            acStTimeCountLayoutTwo.visibility = View.VISIBLE
-            acStImgLine1.visibility = View.VISIBLE
-            acStImgLine2.visibility = View.VISIBLE
+            binding.acStTimeCount.visibility = View.VISIBLE
+            binding.acStTimeCountLayoutTwo.visibility = View.VISIBLE
+            binding.acStImgLine1.visibility = View.VISIBLE
+            binding.acStImgLine2.visibility = View.VISIBLE
             val duration = "自习时长：${record.settingDuration}分钟"
-            acStTimeCountTwo.text = duration
+            binding.acStTimeCountTwo.text = duration
             //倒计时
             startCountDown()
         }
-
-
     }
 
     //倒计时
@@ -231,7 +222,7 @@ class StudyActivity : BaseActivity() {
         val duration = (record.settingDuration!! * 60 * 1000 ) - (now.time - startTime.time)
         timer = object : CountDownTimer(duration, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                acStTimeCount.text = CommonUtil.formatMiss(millisUntilFinished / 1000)
+                binding.acStTimeCount.text = CommonUtil.formatMiss(millisUntilFinished / 1000)
             }
 
             override fun onFinish() {
@@ -254,8 +245,8 @@ class StudyActivity : BaseActivity() {
     //正计时
     private fun initTimer() {
         val seconds = getBaseTime()
-        acStChronometer.base = seconds
-        acStChronometer.setOnChronometerTickListener {
+        binding.acStChronometer.base = seconds
+        binding.acStChronometer.setOnChronometerTickListener {
             setTimeClockFormat(seconds)
         }
     }
@@ -268,10 +259,9 @@ class StudyActivity : BaseActivity() {
 
     private fun setTimeClockFormat(seconds: Long) {
         if (seconds >= 35999) {
-            acStChronometer.format = "%s"
+            binding.acStChronometer.format = "%s"
         } else if (seconds >= 3599) {
-            acStChronometer.format = "0%s"
+            binding.acStChronometer.format = "0%s"
         }
     }
-
 }

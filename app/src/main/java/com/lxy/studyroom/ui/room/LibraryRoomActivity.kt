@@ -16,28 +16,23 @@ import cn.hutool.core.collection.CollUtil
 import com.bumptech.glide.Glide
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
+import com.lxy.studyroom.databinding.ActivityLibraryRoomBinding
+import com.lxy.studyroom.databinding.DialogLibraryDetailBinding
 import com.lxy.studyroom.enums.ResponseEnum
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.model.LibraryRoom
 import com.lxy.studyroom.logic.model.RoomDetail
 import com.lxy.studyroom.util.StatusBarUtil
-import kotlinx.android.synthetic.main.activity_library_room.*
-import kotlinx.android.synthetic.main.dialog_library_detail.view.*
 
 class LibraryRoomActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityLibraryRoomBinding
     private val roomViewModel by lazy { ViewModelProvider(this).get(LibraryRoomViewModel::class.java) }
-
     private var libraryId: Int = 0
-
     private lateinit var detailDialog: AlertDialog
-
     private var libraryData: LibraryRoom? = null
-
     private val floorList = ArrayList<RoomDetail>()
-
     private val roomList = ArrayList<RoomDetail>()
-
     private val fragmentList = ArrayList<LibraryRoomFragment>()
 
     companion object {
@@ -54,26 +49,26 @@ class LibraryRoomActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         //沉浸式状态栏setContentView之前调用
         StatusBarUtil.setStatusBarTextColor(this, Color.TRANSPARENT)
-        setContentView(R.layout.activity_library_room)
+        binding = ActivityLibraryRoomBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(toolbarLibRary)
-        libRoomBar.outlineProvider = null
-        collbarRaryRoom.outlineProvider = ViewOutlineProvider.BOUNDS
+        setSupportActionBar(binding.toolbarLibRary)
+        binding.libRoomBar.outlineProvider = null
+        binding.collbarRaryRoom.outlineProvider = ViewOutlineProvider.BOUNDS
         libraryId = intent.getIntExtra("library_id", 0)
         //加载
         showDianDianLoading()
 
         //viewPager
         val fragmentAdapter = LibraryRoomFragmentAdapter(supportFragmentManager,fragmentList)
-        vp_home_pager.adapter = fragmentAdapter
+        binding.vpHomePager.adapter = fragmentAdapter
 
         //RecyclerView
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        lib_tab.layoutManager = layoutManager
+        binding.libTab.layoutManager = layoutManager
         val tabAdapter = TabAdapter(floorList)
-        lib_tab.adapter = tabAdapter
-
+        binding.libTab.adapter = tabAdapter
 
         //获取图书馆详情数据
         roomViewModel.getClassifyDetail(libraryId)
@@ -91,11 +86,11 @@ class LibraryRoomActivity : BaseActivity() {
 
     private fun setListener(tabAdapter: TabAdapter,fragmentAdapter: LibraryRoomFragmentAdapter){
         //返回
-        libraryRoomBack.setOnClickListener {
+        binding.libraryRoomBack.setOnClickListener {
             onBackPressed()
         }
         //图书馆详情
-        libraryDetail.setOnClickListener {
+        binding.libraryDetail.setOnClickListener {
             showLibraryDetail()
         }
 
@@ -106,12 +101,12 @@ class LibraryRoomActivity : BaseActivity() {
                 tabAdapter.curr = position
                 tabAdapter.notifyDataSetChanged()
                 //更改viewPager当前定位
-                vp_home_pager.currentItem = position
+                binding.vpHomePager.currentItem = position
             }
         })
 
         //监听更改viewPager当前定位
-        vp_home_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+        binding.vpHomePager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
 
             override fun onPageSelected(position: Int) {
@@ -121,9 +116,6 @@ class LibraryRoomActivity : BaseActivity() {
 
             override fun onPageScrollStateChanged(state: Int) {}
         })
-
-
-
     }
 
     private fun observeLibDetail(tabAdapter: TabAdapter,fragmentAdapter: LibraryRoomFragmentAdapter){
@@ -137,8 +129,8 @@ class LibraryRoomActivity : BaseActivity() {
                     val name = libraryData!!.name
                     val coverPath = libraryData!!.coverPath
                     val rooms = libraryData!!.rooms
-                    libDetailTitle.text = name
-                    Glide.with(this).load(coverPath).into(fruitImageView02)
+                    binding.libDetailTitle.text = name
+                    Glide.with(this).load(coverPath).into(binding.fruitImageView02)
                     //处理自习室层级关系
                     if (CollUtil.isNotEmpty(rooms)){
                         for (room in rooms!!){
@@ -151,9 +143,7 @@ class LibraryRoomActivity : BaseActivity() {
                         }
                         //渲染数据
                         handleFragment(fragmentAdapter)
-
                     }
-
                 }
             }else{
                 val msg = resp.msg ?: ResponseEnum.DATA_ERROR.msg
@@ -189,17 +179,17 @@ class LibraryRoomActivity : BaseActivity() {
         detailDialog.setCancelable(true)
         detailDialog.setCanceledOnTouchOutside(false)
 
-        val view = View.inflate(this,R.layout.dialog_library_detail,null)
+        val dialogBinding = DialogLibraryDetailBinding.inflate(layoutInflater)
 
-        detailDialog.setView(view)
+        detailDialog.setView(dialogBinding.root)
         if (detailDialog.window != null) {
             detailDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
-        view.libraryDetClose.setOnClickListener {
+        dialogBinding.libraryDetClose.setOnClickListener {
             hideLibraryDetail()
         }
-        Glide.with(view).load(libraryData!!.iconPath).into(view.libraryDetIcon)
-        view.libraryDetDesc.text = libraryData!!.description
+        Glide.with(this).load(libraryData!!.iconPath).into(dialogBinding.libraryDetIcon)
+        dialogBinding.libraryDetDesc.text = libraryData!!.description
         detailDialog.show()
     }
 
@@ -210,8 +200,5 @@ class LibraryRoomActivity : BaseActivity() {
             }
         }
     }
-
-
-
 }
 

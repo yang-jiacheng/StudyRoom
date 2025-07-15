@@ -15,6 +15,7 @@ import com.hjq.bar.TitleBar
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
 import com.lxy.studyroom.constant.CommonConstant
+import com.lxy.studyroom.databinding.ActivityStatisticsBinding
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.model.StudyRecord
 import com.lxy.studyroom.logic.model.User
@@ -23,16 +24,13 @@ import com.lxy.studyroom.ui.main.rank.RankViewModel
 import com.lxy.studyroom.ui.room.StudyRecordViewModel
 import com.lxy.studyroom.util.CommonUtil
 import com.lxy.studyroom.util.StatusBarUtil
-import kotlinx.android.synthetic.main.activity_personal.*
-import kotlinx.android.synthetic.main.activity_statistics.*
 import kotlin.concurrent.thread
 
 class StatisticsActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityStatisticsBinding
     private val studyRecordViewModel by lazy { ViewModelProvider(this).get(StudyRecordViewModel::class.java) }
-
     private lateinit var user: UserRank
-
     private var records = ArrayList<StudyRecord>()
 
     companion object {
@@ -47,11 +45,12 @@ class StatisticsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         //沉浸式状态栏
         StatusBarUtil.immersiveStatusBar(this, Color.TRANSPARENT)
-        setContentView(R.layout.activity_statistics)
+        binding = ActivityStatisticsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         showDianDianLoading()
         //下拉刷新
-        stSyRefresh.setColorSchemeResources(R.color.colorPrimary)
-        stSyRefresh.setOnRefreshListener{
+        binding.stSyRefresh.setColorSchemeResources(R.color.colorPrimary)
+        binding.stSyRefresh.setOnRefreshListener{
             thread{
                 Thread.sleep(1000)
                 runOnUiThread{
@@ -61,9 +60,9 @@ class StatisticsActivity : BaseActivity() {
         }
 
         //RecyclerView
-        rvRecord.layoutManager = LinearLayoutManager(this)
+        binding.rvRecord.layoutManager = LinearLayoutManager(this)
         val adapter = UserRecordAdapter(this,records)
-        rvRecord.adapter = adapter
+        binding.rvRecord.adapter = adapter
 
         //获取数据
         studyRecordViewModel.getUserRecordsAndStatistics(1,3)
@@ -75,17 +74,17 @@ class StatisticsActivity : BaseActivity() {
 
     private fun setEvent() {
         //标题栏点击事件
-        stSyTitleBar.setOnTitleBarListener(object : OnTitleBarListener {
+        binding.stSyTitleBar.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onLeftClick(titleBar: TitleBar?) {
                 onBackPressed()
             }
         })
         //更多记录
-        stSyMoreRecord.setOnClickListener {
+        binding.stSyMoreRecord.setOnClickListener {
             AllRecordActivity.actionStart(this)
         }
         //查看大图
-        stSyMineIcon.setOnClickListener {
+        binding.stSyMineIcon.setOnClickListener {
             val icon =
                 if (StrUtil.isEmpty(user.profilePath)){
                     CommonConstant.def_icon
@@ -94,8 +93,6 @@ class StatisticsActivity : BaseActivity() {
                 }
             getImagePreview(icon)
         }
-
-
     }
 
     private fun observeData(adapter: UserRecordAdapter){
@@ -111,18 +108,18 @@ class StatisticsActivity : BaseActivity() {
                     //头像
                     val profilePath = user.profilePath
                     if (StrUtil.isNotEmpty(profilePath)){
-                        Glide.with(this@StatisticsActivity).load(profilePath).into(stSyMineIcon)
+                        Glide.with(this@StatisticsActivity).load(profilePath).into(binding.stSyMineIcon)
                     }
                     //今日学习时长
                     if (user.todayDuration != null){
                         val todayDuration = "${user.todayDuration}分钟"
-                        stSyToday.text = todayDuration
+                        binding.stSyToday.text = todayDuration
                     }
                     //总学习时长
                     val totalDuration = "${user.totalDuration}分钟"
-                    stSyAllDuration.text = totalDuration
+                    binding.stSyAllDuration.text = totalDuration
                     //排名
-                    stSyRank.text = user.ranking.toString()
+                    binding.stSyRank.text = user.ranking.toString()
 
                 },
                 {errorFun ->
@@ -130,11 +127,8 @@ class StatisticsActivity : BaseActivity() {
                 },
             )
             adapter.notifyItemRangeChanged(0,records.size)
-            stSyRefresh.isRefreshing = false
+            binding.stSyRefresh.isRefreshing = false
             destroyDianDianLoading()
         }
     }
-
-
-
 }

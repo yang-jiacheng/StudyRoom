@@ -9,17 +9,18 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lxy.studyroom.R
+import com.lxy.studyroom.databinding.FragmentRankBinding
 import com.lxy.studyroom.logic.model.RoomDetail
 import com.lxy.studyroom.logic.model.UserRank
 import com.lxy.studyroom.ui.room.LibraryAreaAdapter
-import kotlinx.android.synthetic.main.fragment_library_room.*
-import kotlinx.android.synthetic.main.fragment_rank.*
 
 class RankFragment : Fragment() {
 
     private val ARG_PARAM1 = "param1"
 
     private lateinit var userList: ArrayList<UserRank>
+    private var _binding: FragmentRankBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,17 +33,23 @@ class RankFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_rank, container, false)
+        _binding = FragmentRankBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rankRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.rankRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         val adapter = UserRankAdapter(requireContext(),userList)
-        rankRecyclerView.adapter = adapter
+        binding.rankRecyclerView.adapter = adapter
 
         val decoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        rankRecyclerView.addItemDecoration(decoration)
+        binding.rankRecyclerView.addItemDecoration(decoration)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

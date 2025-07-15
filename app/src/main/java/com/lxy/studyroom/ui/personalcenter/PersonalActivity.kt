@@ -13,6 +13,7 @@ import com.hjq.bar.TitleBar
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
 import com.lxy.studyroom.constant.CommonConstant
+import com.lxy.studyroom.databinding.ActivityPersonalBinding
 import com.lxy.studyroom.enums.ResponseEnum
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.model.User
@@ -22,16 +23,12 @@ import com.lxy.studyroom.ui.policy.PolicyWebViewActivity
 import com.lxy.studyroom.util.CommonUtil
 import com.lxy.studyroom.util.LogUtil
 import com.lxy.studyroom.util.StatusBarUtil
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_other_user.*
-import kotlinx.android.synthetic.main.activity_personal.*
 import kotlin.concurrent.thread
 
 class PersonalActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityPersonalBinding
     val userViewModel by lazy { ViewModelProvider(this).get(UserViewModel::class.java) }
-
     private lateinit var userInfo: User
 
     companion object {
@@ -47,7 +44,8 @@ class PersonalActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         StatusBarUtil.immersiveStatusBar(this, Color.TRANSPARENT)
-        setContentView(R.layout.activity_personal)
+        binding = ActivityPersonalBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //监听事件
         setListener()
@@ -58,8 +56,8 @@ class PersonalActivity : BaseActivity() {
         //观察用户数据
         observeUserData()
         //下拉刷新
-        mineRefresh.setColorSchemeResources(R.color.colorPrimary)
-        mineRefresh.setOnRefreshListener{
+        binding.mineRefresh.setColorSchemeResources(R.color.colorPrimary)
+        binding.mineRefresh.setOnRefreshListener{
             refreshUserInfo()
         }
     }
@@ -71,30 +69,30 @@ class PersonalActivity : BaseActivity() {
 
     private fun setListener() {
         //TitleBar点击事件
-        mineTitleBar.setOnTitleBarListener(object : OnTitleBarListener{
+        binding.mineTitleBar.setOnTitleBarListener(object : OnTitleBarListener{
             override fun onLeftClick(titleBar: TitleBar?) {
                 onBackPressed()
             }
         })
         //关于软件
-        mineAbout.setOnClickListener {
+        binding.mineAbout.setOnClickListener {
             LogUtil.e("PersonalActivity 关于软件", CommonConstant.ABOUT_US)
             PolicyWebViewActivity.actionStart(this,"关于软件", CommonConstant.ABOUT_US)
         }
         //我的设置
-        mineSettings.setOnClickListener {
+        binding.mineSettings.setOnClickListener {
             MySettingsActivity.actionStart(this)
         }
 
-        mineUpdateBtn.setOnClickListener {
+        binding.mineUpdateBtn.setOnClickListener {
             EditUserInfoActivity.actionStart(this@PersonalActivity,userInfo)
         }
 
-        mineFeedback.setOnClickListener {
+        binding.mineFeedback.setOnClickListener {
             FeedbackActivity.actionStart(this)
         }
 
-        mineCover.setOnClickListener {
+        binding.mineCover.setOnClickListener {
             if (!::userInfo.isInitialized){
                 return@setOnClickListener
             }
@@ -107,7 +105,7 @@ class PersonalActivity : BaseActivity() {
             getImagePreview(cover)
         }
 
-        mineIcon.setOnClickListener {
+        binding.mineIcon.setOnClickListener {
             if (!::userInfo.isInitialized){
                 return@setOnClickListener
             }
@@ -134,8 +132,7 @@ class PersonalActivity : BaseActivity() {
                 val msg = resp.msg ?: ResponseEnum.DATA_ERROR.msg
                 msg.toast(Toast.LENGTH_LONG)
             }
-            mineRefresh.isRefreshing = false
-
+            binding.mineRefresh.isRefreshing = false
         }
     }
 
@@ -147,33 +144,29 @@ class PersonalActivity : BaseActivity() {
         var address = userInfo.address
         val gender = userInfo.gender
 
-
         if (StrUtil.isEmpty(coverPath)){
-            mineCover.setImageResource(R.drawable.def_cover)
+            binding.mineCover.setImageResource(R.drawable.def_cover)
         }else{
-            Glide.with(this).load(coverPath).into(mineCover)
+            Glide.with(this).load(coverPath).into(binding.mineCover)
         }
 
         if (StrUtil.isEmpty(profilePath)){
-            mineIcon.setImageResource(R.drawable.def_path)
+            binding.mineIcon.setImageResource(R.drawable.def_path)
         }else{
-            Glide.with(this).load(profilePath).into(mineIcon)
+            Glide.with(this).load(profilePath).into(binding.mineIcon)
         }
-        mineName.text = name
-        minePhone.text = phone
+        binding.mineName.text = name
+        binding.minePhone.text = phone
 
         if (StrUtil.isEmpty(address)){
             address = "未设置地址"
         }
-        mineAddress.text = address
+        binding.mineAddress.text = address
 
-        mineGender.text = gender
+        binding.mineGender.text = gender
 
         val createTime = "${userInfo.createTime.substring(0,10)} 加入"
-        mineCreateTime.text = createTime
-
-
-
+        binding.mineCreateTime.text = createTime
     }
 
     private fun refreshUserInfo(){
@@ -184,6 +177,4 @@ class PersonalActivity : BaseActivity() {
             }
         }
     }
-
-
 }

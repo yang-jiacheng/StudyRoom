@@ -18,6 +18,7 @@ import com.lxy.studyroom.ActivityCollector
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.BuildConfig
 import com.lxy.studyroom.R
+import com.lxy.studyroom.databinding.ActivityMainBinding
 import com.lxy.studyroom.enums.ResponseEnum
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.Repository
@@ -32,12 +33,13 @@ import com.lxy.studyroom.util.CommonUtil
 import com.lxy.studyroom.util.LogUtil
 import com.lxy.studyroom.util.StatusBarUtil
 import com.lxy.studyroom.util.UpdateUtil
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * 主页
  */
 class MainActivity : BaseActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     private val viewModel by lazy { ViewModelProvider(this).get(LibraryViewModel::class.java) }
 
@@ -71,10 +73,11 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         //沉浸式状态栏setContentView之前调用
         StatusBarUtil.immersiveStatusBar(this, Color.TRANSPARENT)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         updateUtil = UpdateUtil(this)
         //设置默认头像
-        Glide.with(this).load(R.drawable.def_path).into(allUserPro)
+        Glide.with(this).load(R.drawable.def_path).into(binding.allUserPro)
 
         //加载中AlertDialog
         showDianDianLoading()
@@ -82,9 +85,9 @@ class MainActivity : BaseActivity() {
         setEvent()
 
         //RecyclerView
-        allLibrary.layoutManager = LinearLayoutManager(this)
+        binding.allLibrary.layoutManager = LinearLayoutManager(this)
         val adapter = LibraryAdapter(this,libraryList)
-        allLibrary.adapter = adapter
+        binding.allLibrary.adapter = adapter
 
         viewModel.updateRecordToFinish(CommonUtil.getRandomCode())
         versionViewModel.checkVersion(CommonUtil.getRandomCode())
@@ -93,8 +96,6 @@ class MainActivity : BaseActivity() {
         observeUserData()
         observeFinishData()
         observeVersionData()
-
-
     }
 
     override fun onStart() {
@@ -128,7 +129,7 @@ class MainActivity : BaseActivity() {
 
     private fun setEvent() {
         //头像点击跳转
-        allUserPro.setOnClickListener {
+        binding.allUserPro.setOnClickListener {
             //判断userInfo是否已初始化
             if(!::userInfo.isInitialized){
                 "用户信息还未获取到".toast()
@@ -138,11 +139,11 @@ class MainActivity : BaseActivity() {
         }
 
         //排行榜Activity
-        imgStudyRank.setOnClickListener {
+        binding.imgStudyRank.setOnClickListener {
             TotalRankActivity.actionStart(this)
         }
         //统计
-        imgStudyDiary.setOnClickListener {
+        binding.imgStudyDiary.setOnClickListener {
             StatisticsActivity.actionStart(this)
         }
     }
@@ -198,9 +199,9 @@ class MainActivity : BaseActivity() {
                     //没设置头像就用默认的
                     val profilePath = userInfo.profilePath
                     if (StrUtil.isEmpty(profilePath)){
-                        allUserPro.setImageResource(R.drawable.def_path)
+                        binding.allUserPro.setImageResource(R.drawable.def_path)
                     }else{
-                        Glide.with(this).load(profilePath).into(allUserPro)
+                        Glide.with(this).load(profilePath).into(binding.allUserPro)
                     }
                     //存储手机号和userid
                     Repository.saveUserPhone(userInfo.phone)

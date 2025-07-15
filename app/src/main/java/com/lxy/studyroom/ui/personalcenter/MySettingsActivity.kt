@@ -11,6 +11,7 @@ import com.hjq.bar.TitleBar
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
 import com.lxy.studyroom.constant.CommonConstant
+import com.lxy.studyroom.databinding.ActivityMySettingsBinding
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.Repository
 import com.lxy.studyroom.ui.login.ForgetPasswordActivity
@@ -19,12 +20,11 @@ import com.lxy.studyroom.ui.login.TokenViewModel
 import com.lxy.studyroom.ui.policy.PolicyWebViewActivity
 import com.lxy.studyroom.util.CommonUtil
 import com.lxy.studyroom.util.LocalCacheUtil
-import kotlinx.android.synthetic.main.activity_my_settings.*
 
 class MySettingsActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityMySettingsBinding
     private lateinit var cache: LocalCacheUtil
-
     private val tokenViewModel by lazy { ViewModelProvider(this).get(TokenViewModel::class.java) }
 
     companion object {
@@ -37,13 +37,15 @@ class MySettingsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_settings)
+        binding = ActivityMySettingsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        
         //缓存大小
         cache = LocalCacheUtil(this@MySettingsActivity)
-        mineSetCacheSize.text = cache.getCacheSize()
+        binding.mineSetCacheSize.text = cache.getCacheSize()
         //版本号
         val version = "v${AppUtils.getAppVersionName()}"
-        mineSetVersionText.text = version
+        binding.mineSetVersionText.text = version
         //监听事件
         setListener()
 
@@ -57,47 +59,45 @@ class MySettingsActivity : BaseActivity() {
                 resp.msg!!.toast()
             }
         }
-
     }
 
     private fun setListener() {
         //TitleBar点击事件
-        mineSetTitleBar.setOnTitleBarListener(object : OnTitleBarListener{
+        binding.mineSetTitleBar.setOnTitleBarListener(object : OnTitleBarListener{
             override fun onLeftClick(titleBar: TitleBar?) {
                 onBackPressed()
             }
         })
         //修改手机号
-        mineSetUpdatePhone.setOnClickListener {
+        binding.mineSetUpdatePhone.setOnClickListener {
             "暂未开放此功能".toast()
         }
         //修改密码
-        mineSetUpdatePassword.setOnClickListener {
+        binding.mineSetUpdatePassword.setOnClickListener {
             ForgetPasswordActivity.actionStart(this@MySettingsActivity)
         }
         //用户协议
-        mineSetAgreement.setOnClickListener {
+        binding.mineSetAgreement.setOnClickListener {
             PolicyWebViewActivity.actionStart(this,"用户协议", CommonConstant.AGREEMENT)
         }
         //隐私政策
-        mineSetPolicy.setOnClickListener {
+        binding.mineSetPolicy.setOnClickListener {
             PolicyWebViewActivity.actionStart(this,"隐私政策", CommonConstant.POLICY)
         }
         //清除缓存
-        mineSetClearCache.setOnClickListener {
+        binding.mineSetClearCache.setOnClickListener {
             if (::cache.isInitialized){
                 cache.clearAppCache()
-                mineSetCacheSize.text = cache.getCacheSize()
+                binding.mineSetCacheSize.text = cache.getCacheSize()
                 "缓存已清除".toast()
             }
         }
-
         //注销账号
-        mineSetWriteOff.setOnClickListener {
+        binding.mineSetWriteOff.setOnClickListener {
             "暂未开放此功能".toast()
         }
         //退出登录
-        mineSetLogoutBtn.setOnClickListener {
+        binding.mineSetLogoutBtn.setOnClickListener {
             AlertDialog.Builder(this).apply {
                 setTitle("提示")
                 setMessage("确认退出登录？")
@@ -112,8 +112,5 @@ class MySettingsActivity : BaseActivity() {
                 show()
             }
         }
-
     }
-
-
 }

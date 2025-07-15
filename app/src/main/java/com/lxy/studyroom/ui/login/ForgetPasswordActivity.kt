@@ -14,22 +14,19 @@ import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
 import com.lxy.studyroom.BaseActivity
 import com.lxy.studyroom.R
+import com.lxy.studyroom.databinding.ActivityForgetPasswordBinding
 import com.lxy.studyroom.extension.toast
 import com.lxy.studyroom.logic.Repository
 import com.lxy.studyroom.ui.personalcenter.UserViewModel
 import com.lxy.studyroom.util.EncryptUtil
-import kotlinx.android.synthetic.main.activity_forget_password.*
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login_password.*
 import kotlin.concurrent.thread
 
 class ForgetPasswordActivity : BaseActivity() {
 
+    private lateinit var binding: ActivityForgetPasswordBinding
     private val userViewModel by lazy { ViewModelProvider(this).get(UserViewModel::class.java) }
-
     private val tokenViewModel by lazy { ViewModelProvider(this).get(TokenViewModel::class.java) }
-
-    private  var timer: CountDownTimer? = null
+    private var timer: CountDownTimer? = null
 
     companion object {
         @JvmStatic
@@ -41,13 +38,14 @@ class ForgetPasswordActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityForgetPasswordBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        
         //用户手机号
         val userPhone = Repository.getUserPhone()
-        setContentView(R.layout.activity_forget_password)
-
         //设置用户手机号到输入框
         if (StrUtil.isNotEmpty(userPhone)){
-            changePassPhone.setText(userPhone)
+            binding.changePassPhone.setText(userPhone)
         }
 
         //监听事件
@@ -55,7 +53,6 @@ class ForgetPasswordActivity : BaseActivity() {
         //观察数据
         observeVerCode()
         observeUpdatePassword()
-
     }
 
     override fun onBackPressed() {
@@ -65,76 +62,75 @@ class ForgetPasswordActivity : BaseActivity() {
     @SuppressLint("ClickableViewAccessibility")
     private fun setListener() {
         //标题栏监听
-        changePassTitleBar.setOnTitleBarListener(object :OnTitleBarListener{
+        binding.changePassTitleBar.setOnTitleBarListener(object :OnTitleBarListener{
             override fun onLeftClick(titleBar: TitleBar?) {
                 finish()
             }
         })
         //监听手机号输入框
-        textChanges(changePassPhone,500){phone: String? ->
-            changePassPhoneLayout.error = ""
+        textChanges(binding.changePassPhone,500){phone: String? ->
+            binding.changePassPhoneLayout.error = ""
             if (!PhoneUtil.isMobile(phone)){
-                changePassPhoneLayout.error = "请输入正确格式的手机号"
+                binding.changePassPhoneLayout.error = "请输入正确格式的手机号"
             }
         }
         //监听验证码输入框
-        textChanges(changePassVerifyCode,500){code: String ->
-            changePassVerifyCodeLayout.error = ""
+        textChanges(binding.changePassVerifyCode,500){code: String ->
+            binding.changePassVerifyCodeLayout.error = ""
             if (code.length != 6){
-                changePassVerifyCodeLayout.error = "请输入6位数字验证码"
+                binding.changePassVerifyCodeLayout.error = "请输入6位数字验证码"
             }
         }
         //监听密码输入框
-        textChanges(changePassPassword,500){password: String ->
-            changePassPasswordLayout.error = ""
+        textChanges(binding.changePassPassword,500){password: String ->
+            binding.changePassPasswordLayout.error = ""
             if (StrUtil.isBlank(password)){
-                changePassPasswordLayout.error = "请输入密码"
+                binding.changePassPasswordLayout.error = "请输入密码"
             }else{
                 if (password.length !in 6..16){
-                    changePassPasswordLayout.error = "密码长度在6-16位之间"
+                    binding.changePassPasswordLayout.error = "密码长度在6-16位之间"
                 }
             }
         }
 
         //获取验证码
-        changePassGetCode.setOnClickListener {
+        binding.changePassGetCode.setOnClickListener {
             getVerifyCode()
         }
 
-        changePassBtn.setOnClickListener {
+        binding.changePassBtn.setOnClickListener {
             savePassword()
         }
-
     }
 
     private fun savePassword() {
-        val phone = changePassPhone.text.toString()
-        val verifyCode = changePassVerifyCode.text.toString()
-        var password = changePassPassword.text.toString()
+        val phone = binding.changePassPhone.text.toString()
+        val verifyCode = binding.changePassVerifyCode.text.toString()
+        var password = binding.changePassPassword.text.toString()
 
         if (!PhoneUtil.isMobile(phone)){
             val msg = "请输入正确格式的手机号"
-            changePassPhoneLayout.error = msg
+            binding.changePassPhoneLayout.error = msg
             msg.toast()
             return
         }
 
         if (verifyCode.length != 6){
             val msg = "请输入6位数字验证码"
-            changePassVerifyCodeLayout.error = msg
+            binding.changePassVerifyCodeLayout.error = msg
             msg.toast()
             return
         }
 
         if (StrUtil.isBlank(password)){
             val msg = "请输入密码"
-            changePassPasswordLayout.error = msg
+            binding.changePassPasswordLayout.error = msg
             msg.toast()
             return
         }
         if (password.length !in 6..16){
             val msg = "密码长度在6-16位之间"
-            changePassPasswordLayout.error = msg
+            binding.changePassPasswordLayout.error = msg
             msg.toast()
             return
         }
@@ -142,26 +138,25 @@ class ForgetPasswordActivity : BaseActivity() {
         password = EncryptUtil.encryptSha256(password)
         KeyboardUtils.hideSoftInput(this)
         userViewModel.updatePassword(phone,verifyCode,password)
-
     }
 
     private fun getVerifyCode() {
-        val phone = changePassPhone.text.toString()
+        val phone = binding.changePassPhone.text.toString()
         if (StrUtil.isBlank(phone)){
             val msg = "请输入手机号"
-            changePassPhoneLayout.error = msg
+            binding.changePassPhoneLayout.error = msg
             msg.toast()
             return
         }
         if (!PhoneUtil.isMobile(phone)){
             val msg = "请输入正确格式的手机号"
-            changePassPhoneLayout.error = msg
+            binding.changePassPhoneLayout.error = msg
             msg.toast()
             return
         }
         //隐藏输入法
         KeyboardUtils.hideSoftInput(this)
-        changePassGetCode.isEnabled = false
+        binding.changePassGetCode.isEnabled = false
         //此处应该将手机号 进行 3DES加密传给后端，后续补上
         tokenViewModel.getVerificationCode(phone)
     }
@@ -178,7 +173,7 @@ class ForgetPasswordActivity : BaseActivity() {
                 startCountDown()
             }else{
                 resp.msg!!.toast()
-                changePassGetCode.isEnabled = true
+                binding.changePassGetCode.isEnabled = true
             }
         }
     }
@@ -208,17 +203,15 @@ class ForgetPasswordActivity : BaseActivity() {
     private fun startCountDown(){
         timer = object : CountDownTimer(60 * 1000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                changePassGetCode.text = StrUtil.format("{}秒后重新获取", millisUntilFinished / 1000)
+                binding.changePassGetCode.text = StrUtil.format("{}秒后重新获取", millisUntilFinished / 1000)
             }
 
             override fun onFinish() {
-                changePassGetCode.isEnabled = true
-                changePassGetCode.text = "重新获取"
+                binding.changePassGetCode.isEnabled = true
+                binding.changePassGetCode.text = "重新获取"
             }
         }
-        changePassGetCode.isEnabled = false
+        binding.changePassGetCode.isEnabled = false
         timer?.start()
     }
-
-
 }

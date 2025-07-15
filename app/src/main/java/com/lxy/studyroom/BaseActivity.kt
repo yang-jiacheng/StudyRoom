@@ -41,8 +41,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
-import kotlinx.android.synthetic.main.activity_edit_user_info.*
-import kotlinx.android.synthetic.main.version_update_info.*
 import java.io.File
 import java.util.concurrent.TimeUnit
 
