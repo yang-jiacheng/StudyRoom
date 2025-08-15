@@ -1,37 +1,34 @@
 package com.lxy.studyroom.util
 
+import com.lxy.studyroom.BuildConfig
 import org.apache.commons.codec.binary.Base64
+import java.nio.charset.StandardCharsets
+import java.security.Key
+import java.security.SecureRandom
 import javax.crypto.Cipher
-import javax.crypto.SecretKey
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.DESedeKeySpec
 import javax.crypto.spec.IvParameterSpec
 
+
 object DESUtil {
 
-    //算法
     private const val ALGORITHM = "DESede"
-    //参数：第一段是加密算法的名称，第二段是分组加密的模式，第三段是指最后一个分组的填充方式
     private const val PARAM = "DESede/CBC/PKCS5Padding"
-    // 密钥 长度不得小于24
-    private const val SECRET_KEY = "lanshan-edu-ycyk-2022-java"
-    // 向量 可有可无 终端后台也要约定
-    private const val IV = "20220802"
-    // 加解密统一使用的编码方式
     private const val ENCODING = "utf-8"
-    // 密钥种子
-    private val KEY: SecretKey
+
+    const val SECRET_KEY_CONFIG = BuildConfig.SECRET_KEY_CONFIG
+
+    private val key: Key
 
     init {
         try {
-            // DES算法策略
-            val spec = DESedeKeySpec(SECRET_KEY.toByteArray())
-            // 密钥工厂
-            val keyfactory = SecretKeyFactory.getInstance(ALGORITHM)
-            // 获取密钥种子
-            KEY = keyfactory.generateSecret(spec)
+            require(SECRET_KEY_CONFIG.length >= 24) { "3DES 密钥长度不得小于 24 位" }
+            val spec = DESedeKeySpec(SECRET_KEY_CONFIG.toByteArray(StandardCharsets.UTF_8))
+            val keyFactory = SecretKeyFactory.getInstance(ALGORITHM)
+            key = keyFactory.generateSecret(spec)
         } catch (e: Exception) {
-            throw RuntimeException("生成密钥种子失败", e)
+            throw RuntimeException("生成密钥失败", e)
         }
     }
 
@@ -41,13 +38,21 @@ object DESUtil {
      */
     fun encode(plainText: String): String {
         try {
+            // 随机生成IV
+            val ivBytes = ByteArray(8)
+            SecureRandom().nextBytes(ivBytes)
+            val iv = IvParameterSpec(ivBytes)
             val cipher = Cipher.getInstance(PARAM)
-            val ips = IvParameterSpec(IV.toByteArray())
-            cipher.init(Cipher.ENCRYPT_MODE, KEY, ips)
+            cipher.init(Cipher.ENCRYPT_MODE, key, iv)
             val encryptData = cipher.doFinal(plainText.toByteArray(charset(ENCODING)))
-            return Base64.encodeBase64String(encryptData)
+            // 拼接 IV + 密文
+            val ivAndCipher = ByteArray(ivBytes.size + encryptData.size)
+            System.arraycopy(ivBytes, 0, ivAndCipher, 0, ivBytes.size)
+            System.arraycopy(encryptData, 0, ivAndCipher, ivBytes.size, encryptData.size)
+            return Base64.encodeBase64String(ivAndCipher)
         } catch (e: Exception) {
-            throw RuntimeException("加密失败", e)
+            LogUtil.e("encode","加密失败")
+            return ""
         }
     }
 
@@ -57,29 +62,25 @@ object DESUtil {
      */
     fun decode(encryptText: String): String {
         try {
+            val ivAndCipher = Base64.decodeBase64(encryptText)
+            // 提取 IV
+            val ivBytes = ByteArray(8)
+            System.arraycopy(ivAndCipher, 0, ivBytes, 0, ivBytes.size)
+            val iv = IvParameterSpec(ivBytes)
+            // 提取密文
+            val cipherBytes = ByteArray(ivAndCipher.size - ivBytes.size)
+            System.arraycopy(ivAndCipher, ivBytes.size, cipherBytes, 0, cipherBytes.size)
             val cipher = Cipher.getInstance(PARAM)
-            val ips = IvParameterSpec(IV.toByteArray())
-            cipher.init(Cipher.DECRYPT_MODE, KEY, ips)
-            val decryptData = cipher.doFinal(Base64.decodeBase64(encryptText))
+            cipher.init(Cipher.DECRYPT_MODE, key, iv)
+            val decryptData = cipher.doFinal(cipherBytes)
             return String(decryptData, charset(ENCODING))
         } catch (e: Exception) {
-            throw RuntimeException("解密失败", e)
+            LogUtil.e("decode","解密失败")
+            return ""
         }
     }
 
 
-}
-
-fun main() {
-//    val text = "4f1499ea2f,Cu3KsAxAOv,c4ce45bb-32a5-4dcc-82c1-4dd61a74c133,84420889-902d-425e-b938-99290ff1c4cd"
-//    val textP = "yJZoKH2SHz4G08O1itQ3cfxHtB21/1jQ0AZGNMxib8k/p7bp5bYnBFUIdi26Q8W7xKRgLKaVOYniySbT7QrZrOd7XKkL8ut1eGgqSW3D9gxgT8HNjJozlAeRXMWeLAoz"
-//    val a = DESUtil.decode("yJZoKH2SHz4G08O1itQ3cfxHtB21/1jQ0AZGNMxib8k/p7bp5bYnBFUIdi26Q8W7xKRgLKaVOYniySbT7QrZrOd7XKkL8ut1eGgqSW3D9gxgT8HNjJozlAeRXMWeLAoz")
-//    val b = DESUtil.encode("4f1499ea2f,Cu3KsAxAOv,c4ce45bb-32a5-4dcc-82c1-4dd61a74c133,84420889-902d-425e-b938-99290ff1c4cd")
-//    println(a)
-//    println(b)
-//
-//    println(text == a)
-//    println(textP == b)
 }
 
 

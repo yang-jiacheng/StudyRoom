@@ -9,10 +9,12 @@ ext {
     prod_host = '"http://115.29.185.30/selfStudyApp/"'
     prod_domain = '"http://115.29.185.30"'
 
-    local_host = '"' + "http://192.168.21.90:8072/selfStudyApp/" + '"'
-    local_domain = "http://192.168.21.90:8072"
+    local_host = '"' + "http://192.168.104.10:8072/selfStudyApp/" + '"'
+    local_domain = "http://192.168.104.10:8072"
 
     oss_prefix = '"https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com"'
+
+    secret_key_config = '"hG7kP9vT2yLmX4qA1cZbR5sU"'
 
 }
 
@@ -71,6 +73,7 @@ android {
             buildConfigField "String", "API_HOST", prod_host
             buildConfigField "String", "DOMAIN", prod_domain
             buildConfigField "String", "OSS_PREFIX", oss_prefix
+            buildConfigField "String", "SECRET_KEY_CONFIG", secret_key_config
             dimension "main"
             manifestPlaceholders = ["flavors"    : "团团云自习"]
         }
@@ -78,6 +81,7 @@ android {
             buildConfigField "String", "API_HOST", local_host
             buildConfigField "String", "DOMAIN", '"' + local_domain + '"'
             buildConfigField "String", "OSS_PREFIX", oss_prefix
+            buildConfigField "String", "SECRET_KEY_CONFIG", secret_key_config
             dimension "main"
             manifestPlaceholders = ["flavors"    : "团团云自习-本地"]
         }
