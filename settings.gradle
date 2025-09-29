@@ -14,7 +14,6 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         maven { url "https://www.jitpack.io" }
-        maven { url "https://jitpack.io" }
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/central' }
@@ -22,12 +21,6 @@ dependencyResolutionManagement {
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         google()
         mavenCentral()
-
-
-
-//        maven { url 'https://repo1.maven.org/maven2/' }
-//        maven { url "https://nexus-sdk.cm253.com/repository/maven-public/" }
-//        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
     }
 }
 rootProject.name = "StudyRoom"
