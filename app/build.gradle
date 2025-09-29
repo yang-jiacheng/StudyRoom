@@ -43,7 +43,7 @@ android {
             keyPassword 'yjc010709'
         }
         release {
-            storeFile file('D:/android/jksstudyroom.jks')
+            storeFile file('D:/android/jks/studyroom.jks')
             storePassword 'yjc010709'
             keyAlias 'studyroomprod'
             keyPassword 'yjc010709'
