@@ -10,15 +10,15 @@ import com.lxy.studyroom.util.LogUtil
 
 class LibraryRoomViewModel : ViewModel() {
 
-    private val libDetailLiveData = MutableLiveData<Int>()
+    private val libDetailLiveData = MutableLiveData<Long>()
 
-    private val roomRecordLiveData = MutableLiveData<Int>()
+    private val roomRecordLiveData = MutableLiveData<Long>()
 
     private val startStudyLiveData = MutableLiveData<StudyRecordDTO>()
 
-    private val stopStudyLiveData = MutableLiveData<Int>()
+    private val stopStudyLiveData = MutableLiveData<Long>()
 
-    private val recordDetailLiveData = MutableLiveData<Int>()
+    private val recordDetailLiveData = MutableLiveData<Long>()
 
     private val submitStudyLiveData = MutableLiveData<StudyDurationDTO>()
 
@@ -47,11 +47,11 @@ class LibraryRoomViewModel : ViewModel() {
         Repository.submitStudyDuration(studyDurationDTO.recordId,studyDurationDTO.duration)
     }
 
-    fun getClassifyDetail(classifyId: Int){
+    fun getClassifyDetail(classifyId: Long){
         libDetailLiveData.value = classifyId
     }
 
-    fun getRoomDetailAndRecords(roomId: Int){
+    fun getRoomDetailAndRecords(roomId: Long){
         roomRecordLiveData.value = roomId
     }
 
@@ -59,11 +59,11 @@ class LibraryRoomViewModel : ViewModel() {
         startStudyLiveData.value = studyRecordDTO
     }
 
-    fun stopStudy(recordId: Int){
+    fun stopStudy(recordId: Long){
         stopStudyLiveData.value = recordId
     }
 
-    fun getLearningRecordDetail(recordId: Int){
+    fun getLearningRecordDetail(recordId: Long){
         recordDetailLiveData.value = recordId
     }
 

@@ -31,7 +31,7 @@ class OtherUserActivity : BaseActivity() {
 
     companion object {
         @JvmStatic
-        fun actionStart(context: Context,userId: Int){
+        fun actionStart(context: Context,userId: Long){
             val intent = Intent(context, OtherUserActivity::class.java).apply {
                 putExtra("user_id",userId)
             }
@@ -47,7 +47,7 @@ class OtherUserActivity : BaseActivity() {
         setContentView(binding.root)
         
         //获取上个页面传来的用户id
-        val userId = intent.getIntExtra("user_id", -1)
+        val userId = intent.getLongExtra("user_id", -1L)
         //根据用户id获取用户信息
         userViewModel.getUserInfoById(userId)
         //观察数据

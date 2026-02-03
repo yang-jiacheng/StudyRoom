@@ -37,13 +37,11 @@ class LoginPasswordActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginPasswordBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
         //用户协议是否已选中
         val agreePolicy = Repository.getAgreePolicy()
         //用户手机号
         val userPhone = Repository.getUserPhone()
-        setContentView(R.layout.activity_login_password)
         if (StrUtil.isNotEmpty(userPhone)){
             binding.tpMobile.setText(userPhone)
         }

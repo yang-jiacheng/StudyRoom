@@ -32,14 +32,14 @@ class RoomDetailActivity : BaseActivity() {
     private val roomViewModel by lazy { ViewModelProvider(this).get(LibraryRoomViewModel::class.java) }
     private lateinit var roomRecord: RoomRecord
     private lateinit var roomName: String
-    private var roomId: Int = 0
-    private var libraryId: Int = 0
+    private var roomId: Long = 0
+    private var libraryId: Long = 0
     private val records = ArrayList<StudyRecord>()
     private lateinit var detailDialog: AlertDialog
 
     companion object {
         @JvmStatic
-        fun actionStart(context: Context, roomId: Int,classifyId: Int){
+        fun actionStart(context: Context, roomId: Long,classifyId: Long){
             val intent = Intent(context, RoomDetailActivity::class.java).apply {
                 putExtra("room_id", roomId)
                 putExtra("library_id", classifyId)
@@ -53,8 +53,8 @@ class RoomDetailActivity : BaseActivity() {
         binding = ActivityRoomDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        roomId = intent.getIntExtra("room_id",0)
-        libraryId = intent.getIntExtra("library_id",0)
+        roomId = intent.getLongExtra("room_id",0)
+        libraryId = intent.getLongExtra("library_id",0)
 
         //加载
         showDianDianLoading()

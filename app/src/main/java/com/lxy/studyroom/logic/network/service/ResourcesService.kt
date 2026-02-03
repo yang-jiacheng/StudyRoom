@@ -1,6 +1,6 @@
 package com.lxy.studyroom.logic.network.service
 
-import com.lxy.studyroom.logic.model.ResponseResult
+import com.lxy.studyroom.logic.model.base.ResponseResult
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Multipart

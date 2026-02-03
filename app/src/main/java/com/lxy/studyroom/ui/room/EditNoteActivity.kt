@@ -26,7 +26,7 @@ import com.lxy.studyroom.ui.upload.UploadViewModel
 class EditNoteActivity : BaseActivity() {
 
     private lateinit var binding: ActivityEditNoteBinding
-    private var recordId: Int = 0
+    private var recordId: Long = 0
 
     /**
      * 学习记录
@@ -41,7 +41,7 @@ class EditNoteActivity : BaseActivity() {
 
     companion object{
         @JvmStatic
-        fun actionStart(context: Context, recordId: Int){
+        fun actionStart(context: Context, recordId: Long){
             val intent = Intent(context, EditNoteActivity::class.java).apply {
                 putExtra("record_id", recordId)
             }
@@ -53,7 +53,7 @@ class EditNoteActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        recordId = intent.getIntExtra("record_id",0)
+        recordId = intent.getLongExtra("record_id",0L)
         //获取笔记详情
         studyRecordViewModel.getStudyNoteDetail(recordId)
         //监听事件

@@ -3,7 +3,7 @@ package com.lxy.studyroom.util
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
-import com.lxy.studyroom.logic.model.ResponseResult
+import com.lxy.studyroom.logic.model.base.ResponseResult
 import java.util.*
 import kotlin.math.ceil
 

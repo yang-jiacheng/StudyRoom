@@ -160,18 +160,15 @@ productFlavors {
 
 ### 🌐 Online Experience
 
-**Admin Management System:** http://115.29.185.30/studyRoomAdminWeb/#/
+**Android Client Download：** [Click to download](https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk)
 
-**Demo Accounts:**
+**Admin Backend：** http://115.29.185.30/studyRoomAdminWeb/#/
 
-- Administrator: `yjc123` / `123456`
-- Other roles: `xiuyu123` / `123456`
+**Demo Account：**
 
-**Android Client Download:** https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk
+`test123` / `123456`
+> Note: The demo account only has query permission
 
-**Mobile Demo Account:** `17508660924` / `123456`
-
-> ⚠️ **Note:** Due to Alibaba Cloud SMS service restrictions, individual developers cannot apply for SMS signature, please use password login method
 
 ### 📱 Feature Preview
 

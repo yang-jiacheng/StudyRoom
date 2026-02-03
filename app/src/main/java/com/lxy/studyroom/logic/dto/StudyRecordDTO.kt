@@ -7,7 +7,7 @@ import java.io.Serializable
  */
 
 data class StudyRecordDTO(
-    val catalogId: Int,
+    val catalogId: Long,
     var tag: String,
     val seat: Int,
     //计时方式：1正计时 2倒计时

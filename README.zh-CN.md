@@ -163,18 +163,14 @@ productFlavors {
 
 ### 🌐 在线体验
 
+**Android 客户端下载：** [点击下载](https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk)
+
 **后台管理系统：** http://115.29.185.30/studyRoomAdminWeb/#/
 
 **演示账号：**
 
-- 管理员：`yjc123` / `123456`
-- 其他角色：`xiuyu123` / `123456`
-
-**Android 客户端下载：** https://selfstudy-server.oss-cn-hangzhou.aliyuncs.com/android/studyroom/apk/studyroom-1.0.6-7-0125.apk
-
-**移动端演示账号：** `17508660924` / `123456`
-
-> ⚠️ **注意：** 由于阿里云SMS短信服务限制，个人开发者无法申请短信签名，请使用密码登录方式
+`test123` / `123456`
+> 注: 演示账号仅有查询权限
 
 ### 📱 功能预览
 
@@ -226,4 +222,3 @@ StudyRoom 是根据Apache许可证2.0版获得许可的。有关完整的许可�
 	<p><strong>⭐ 如果这个项目对您有帮助，请给我一个Star！⭐</strong></p>
     <p><strong>📢 欢迎分享给更多需要的朋友！📢</strong></p>
 </div>
-

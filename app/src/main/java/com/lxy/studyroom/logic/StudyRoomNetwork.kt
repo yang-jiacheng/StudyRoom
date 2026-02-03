@@ -2,7 +2,15 @@ package com.lxy.studyroom.logic
 
 import com.lxy.studyroom.logic.dto.StudyRecordDTO
 import com.lxy.studyroom.logic.network.ServiceCreator
-import com.lxy.studyroom.logic.network.service.*
+import com.lxy.studyroom.logic.network.service.CatalogService
+import com.lxy.studyroom.logic.network.service.FeedbackService
+import com.lxy.studyroom.logic.network.service.LibraryService
+import com.lxy.studyroom.logic.network.service.PersonalCenterService
+import com.lxy.studyroom.logic.network.service.ResourcesService
+import com.lxy.studyroom.logic.network.service.StudyRecordService
+import com.lxy.studyroom.logic.network.service.StudyStatisticsService
+import com.lxy.studyroom.logic.network.service.TokenService
+import com.lxy.studyroom.logic.network.service.VersionControlService
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,6 +35,7 @@ object StudyRoomNetwork {
                         continuation.resumeWithException(RuntimeException("response body is null"))
                     }
                 }
+
                 override fun onFailure(call: Call<T>, t: Throwable) {
                     continuation.resumeWithException(RuntimeException("Are you ok ?"))
                 }
@@ -37,16 +46,16 @@ object StudyRoomNetwork {
     /**
      * 版本控制
      */
-    private val versionControlService  = ServiceCreator.create<VersionControlService>()
+    private val versionControlService = ServiceCreator.create<VersionControlService>()
 
     suspend fun checkVersion() = versionControlService.checkVersion().await()
 
-            /**
+    /**
      * 上传文件
      */
     private val resourcesService = ServiceCreator.create<ResourcesService>()
 
-    suspend fun upload(file :List<MultipartBody.Part>) = resourcesService.upload(file).await()
+    suspend fun upload(file: List<MultipartBody.Part>) = resourcesService.upload(file).await()
 
     /**
      * 图书馆
@@ -55,34 +64,34 @@ object StudyRoomNetwork {
 
     suspend fun getAllLibrary() = libraryService.getAllLibrary().await()
 
-    suspend fun getClassifyDetail(classifyId: Int) =
+    suspend fun getClassifyDetail(classifyId: Long) =
         libraryService.getClassifyDetail(classifyId).await()
 
     /**
      * 自习室
      */
-    private val catalogService  = ServiceCreator.create<CatalogService>()
+    private val catalogService = ServiceCreator.create<CatalogService>()
 
-    private val studyStatisticsService  = ServiceCreator.create<StudyStatisticsService>()
+    private val studyStatisticsService = ServiceCreator.create<StudyStatisticsService>()
 
-    private val studyRecordService  = ServiceCreator.create<StudyRecordService>()
+    private val studyRecordService = ServiceCreator.create<StudyRecordService>()
 
-    suspend fun getRoomDetail(roomId: Int) = catalogService.getRoomDetail(roomId).await()
+    suspend fun getRoomDetail(roomId: Long) = catalogService.getRoomDetail(roomId).await()
 
-    suspend fun getLearningRecords(catalogId: Int) =
+    suspend fun getLearningRecords(catalogId: Long) =
         catalogService.getLearningRecords(catalogId).await()
 
     suspend fun startStudy(studyRecordDTO: StudyRecordDTO) =
         catalogService.startStudy(studyRecordDTO).await()
 
-    suspend fun stopStudy(recordId: Int) = catalogService.stopStudy(recordId).await()
+    suspend fun stopStudy(recordId: Long) = catalogService.stopStudy(recordId).await()
 
     suspend fun updateRecordToFinish() = catalogService.updateRecordToFinish().await()
 
-    suspend fun getLearningRecordDetail(recordId: Int) =
+    suspend fun getLearningRecordDetail(recordId: Long) =
         catalogService.getLearningRecordDetail(recordId).await()
 
-    suspend fun submitStudyDuration(recordId: Int,duration: Int) =
+    suspend fun submitStudyDuration(recordId: Long, duration: Int) =
         studyStatisticsService.submitStudyDuration(recordId, duration).await()
 
     suspend fun getRankings() = studyStatisticsService.getRankings().await()
@@ -94,16 +103,20 @@ object StudyRoomNetwork {
     /**
      * 自习记录、笔记
      */
-    suspend fun getStudyNoteDetail(recordId: Int) = studyRecordService.getStudyNoteDetail(recordId).await()
+    suspend fun getStudyNoteDetail(recordId: Long) =
+        studyRecordService.getStudyNoteDetail(recordId).await()
 
-    suspend fun getStudyNotes(page: Int,limit: Int) = studyRecordService.getStudyNotes(page, limit).await()
+    suspend fun getStudyNotes(page: Int, limit: Int) =
+        studyRecordService.getStudyNotes(page, limit).await()
 
-    suspend fun saveStudyNote(recordId: Int,content: String,pic: String) =
+    suspend fun saveStudyNote(recordId: Long, content: String, pic: String) =
         studyRecordService.saveStudyNote(recordId, content, pic).await()
 
-    suspend fun removeStudyNote(recordId: Int) = studyRecordService.removeStudyNote(recordId).await()
+    suspend fun removeStudyNote(recordId: Long) =
+        studyRecordService.removeStudyNote(recordId).await()
 
-    suspend fun getStudyRecord(page: Int,limit: Int) = studyRecordService.getStudyRecord(page, limit).await()
+    suspend fun getStudyRecord(page: Int, limit: Int) =
+        studyRecordService.getStudyRecord(page, limit).await()
 
     /**
      * 反馈
@@ -111,22 +124,24 @@ object StudyRoomNetwork {
 
     private val feedbackService = ServiceCreator.create<FeedbackService>()
 
-    suspend fun submitFeedBack(content: String,pic: String) = feedbackService.submitFeedBack(content, pic).await()
+    suspend fun submitFeedBack(content: String, pic: String) =
+        feedbackService.submitFeedBack(content, pic).await()
 
-    suspend fun getFeedBackList(page: Int,limit: Int,mine: Int) = feedbackService.getFeedBackList(page, limit, mine).await()
+    suspend fun getFeedBackList(page: Int, limit: Int, mine: Int) =
+        feedbackService.getFeedBackList(page, limit, mine).await()
 
-    suspend fun getFeedBackDetail(id: Int) = feedbackService.getFeedBackDetail(id).await()
+    suspend fun getFeedBackDetail(id: Long) = feedbackService.getFeedBackDetail(id).await()
 
     /**
      * 认证相关
      */
-    private val tokenService  = ServiceCreator.create<TokenService>()
+    private val tokenService = ServiceCreator.create<TokenService>()
 
     suspend fun getVerificationCode(phone: String) = tokenService.getVerificationCode(phone).await()
 
-    suspend fun login(phone: String,password: String) = tokenService.login(phone, password).await()
+    suspend fun login(phone: String, password: String) = tokenService.login(phone, password).await()
 
-    suspend fun loginByVerificationCode(phone: String,verificationCode: String) =
+    suspend fun loginByVerificationCode(phone: String, verificationCode: String) =
         tokenService.loginByVerificationCode(phone, verificationCode).await()
 
     suspend fun logout() = tokenService.logout().await()
@@ -134,18 +149,24 @@ object StudyRoomNetwork {
     /**
      * 用户相关
      */
-    private val personalCenterService  = ServiceCreator.create<PersonalCenterService>()
+    private val personalCenterService = ServiceCreator.create<PersonalCenterService>()
 
-    suspend fun updatePassword(phone: String,verificationCode: String,password: String) =
-            personalCenterService.updatePassword(phone, verificationCode, password).await()
+    suspend fun updatePassword(phone: String, verificationCode: String, password: String) =
+        personalCenterService.updatePassword(phone, verificationCode, password).await()
 
-    suspend fun updateUserInfo(name: String,gender: String,address: String,profilePath: String,coverPath: String) =
+    suspend fun updateUserInfo(
+        name: String,
+        gender: String,
+        address: String,
+        profilePath: String,
+        coverPath: String
+    ) =
         personalCenterService.updateUserInfo(name, gender, address, profilePath, coverPath).await()
 
     suspend fun getUserInfo() = personalCenterService.getUserInfo().await()
 
-    suspend fun getUserInfoById(userId: Int) = personalCenterService.getUserInfoById(userId).await()
-
+    suspend fun getUserInfoById(userId: Long) =
+        personalCenterService.getUserInfoById(userId).await()
 
 
 }

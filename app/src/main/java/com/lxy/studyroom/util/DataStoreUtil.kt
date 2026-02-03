@@ -46,6 +46,19 @@ object DataStoreUtil {
         return value ?: defValue
     }
 
+    fun putLong(key: String, value: Long) {
+        dataStore.updateDataAsync { preferences: Preferences ->
+            val mutablePreferences = preferences.toMutablePreferences()
+            mutablePreferences[longPreferencesKey(key)] = value
+            Single.just(mutablePreferences)
+        }
+    }
+
+    fun getLong(key: String, defValue: Long): Long {
+        val value = dataStore.data().blockingFirst()[longPreferencesKey(key)]
+        return value ?: defValue
+    }
+
     fun putBoolean(key: String, value: Boolean) {
         dataStore.updateDataAsync { preferences: Preferences ->
             val mutablePreferences = preferences.toMutablePreferences()

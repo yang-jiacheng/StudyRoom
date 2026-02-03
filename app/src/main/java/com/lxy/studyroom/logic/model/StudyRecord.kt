@@ -3,10 +3,10 @@ package com.lxy.studyroom.logic.model
 import java.io.Serializable
 
 data class StudyRecord(
-    val id: Int,
-    val userId: Int,
-    val classifyId: Int,
-    val catalogId: Int,
+    val id: Long,
+    val userId: Long,
+    val classifyId: Long,
+    val catalogId: Long,
     val tag: String,
     val seat: Int,
     //计时方式：1正计时 2倒计时

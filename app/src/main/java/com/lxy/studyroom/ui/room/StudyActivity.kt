@@ -36,7 +36,7 @@ class StudyActivity : BaseActivity() {
     private val roomViewModel by lazy { ViewModelProvider(this).get(LibraryRoomViewModel::class.java) }
     private var timer: CountDownTimer? = null
     private lateinit var record: StudyRecord
-    private var recordId: Int = 0
+    private var recordId: Long = 0
     private lateinit var roomName: String
     private var flag = false
     private var lightFlag = false
@@ -44,7 +44,7 @@ class StudyActivity : BaseActivity() {
 
     companion object {
         @JvmStatic
-        fun actionStart(context: Context, recordId: Int,roomName: String,flag: Boolean){
+        fun actionStart(context: Context, recordId: Long,roomName: String,flag: Boolean){
             val intent = Intent(context, StudyActivity::class.java).apply {
                 putExtra("record_id", recordId)
                 putExtra("room_name",roomName)
@@ -60,7 +60,7 @@ class StudyActivity : BaseActivity() {
         binding = ActivityStudyBinding.inflate(layoutInflater)
         setContentView(binding.root)
         showDianDianLoading()
-        recordId = intent.getIntExtra("record_id",0)
+        recordId = intent.getLongExtra("record_id",0)
         roomName = intent.getStringExtra("room_name").toString()
         flag = intent.getBooleanExtra("flag",false)
         //获取记录详情

@@ -3,7 +3,7 @@ package com.lxy.studyroom.logic.model
 import java.io.Serializable
 
 data class User(
-    val id: Int,
+    val id: Long,
     val name: String,
     val phone: String,
     val profilePath: String,

@@ -1,6 +1,6 @@
 package com.lxy.studyroom.logic.network.service
 
-import com.lxy.studyroom.logic.model.ResponseResult
+import com.lxy.studyroom.logic.model.base.ResponseResult
 import com.lxy.studyroom.logic.model.User
 import retrofit2.Call
 import retrofit2.http.POST

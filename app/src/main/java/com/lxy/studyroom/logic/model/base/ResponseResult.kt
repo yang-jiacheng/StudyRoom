@@ -1,4 +1,4 @@
-package com.lxy.studyroom.logic.model
+package com.lxy.studyroom.logic.model.base
 
 import com.google.gson.annotations.SerializedName
 import com.lxy.studyroom.enums.ResponseEnum

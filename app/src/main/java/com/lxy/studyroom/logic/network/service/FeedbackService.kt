@@ -1,7 +1,7 @@
 package com.lxy.studyroom.logic.network.service
 
 import com.lxy.studyroom.logic.model.Feedback
-import com.lxy.studyroom.logic.model.ResponseResult
+import com.lxy.studyroom.logic.model.base.ResponseResult
 import retrofit2.Call
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -25,6 +25,6 @@ interface FeedbackService {
      * 反馈详情
      */
     @POST("feedBack/getFeedBackDetail")
-    fun getFeedBackDetail(@Query("id") id: Int) : Call<ResponseResult<Feedback>>
+    fun getFeedBackDetail(@Query("id") id: Long) : Call<ResponseResult<Feedback>>
 
 }

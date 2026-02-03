@@ -1,6 +1,6 @@
 package com.lxy.studyroom.logic.network.service
 
-import com.lxy.studyroom.logic.model.ResponseResult
+import com.lxy.studyroom.logic.model.base.ResponseResult
 import com.lxy.studyroom.logic.model.User
 import retrofit2.Call
 import retrofit2.http.POST
@@ -18,7 +18,7 @@ interface PersonalCenterService {
      * 获取个人信息根据id
      */
     @POST("personalCenter/getUserInfoById")
-    fun getUserInfoById(@Query("userId") userId: Int) : Call<ResponseResult<User>>
+    fun getUserInfoById(@Query("userId") userId: Long) : Call<ResponseResult<User>>
 
     /**
      * 修改个人信息

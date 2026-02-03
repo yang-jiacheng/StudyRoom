@@ -28,7 +28,7 @@ class LibraryRoomActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLibraryRoomBinding
     private val roomViewModel by lazy { ViewModelProvider(this).get(LibraryRoomViewModel::class.java) }
-    private var libraryId: Int = 0
+    private var libraryId: Long = 0
     private lateinit var detailDialog: AlertDialog
     private var libraryData: LibraryRoom? = null
     private val floorList = ArrayList<RoomDetail>()
@@ -37,7 +37,7 @@ class LibraryRoomActivity : BaseActivity() {
 
     companion object {
         @JvmStatic
-        fun actionStart(context: Context,  libraryId: Int){
+        fun actionStart(context: Context,  libraryId: Long){
             val intent = Intent(context, LibraryRoomActivity::class.java).apply {
                 putExtra("library_id", libraryId)
             }
@@ -55,7 +55,7 @@ class LibraryRoomActivity : BaseActivity() {
         setSupportActionBar(binding.toolbarLibRary)
         binding.libRoomBar.outlineProvider = null
         binding.collbarRaryRoom.outlineProvider = ViewOutlineProvider.BOUNDS
-        libraryId = intent.getIntExtra("library_id", 0)
+        libraryId = intent.getLongExtra("library_id", 0)
         //加载
         showDianDianLoading()
 

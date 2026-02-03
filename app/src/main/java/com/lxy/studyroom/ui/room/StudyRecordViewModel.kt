@@ -8,13 +8,13 @@ import com.lxy.studyroom.logic.Repository
 class StudyRecordViewModel : ViewModel() {
 
     //获取学习笔记详情
-    private val noteDetailLiveData = MutableLiveData<Int>()
+    private val noteDetailLiveData = MutableLiveData<Long>()
 
     val noteDetailResp = Transformations.switchMap(noteDetailLiveData) { recordId ->
         Repository.getStudyNoteDetail(recordId)
     }
 
-    fun getStudyNoteDetail(recordId: Int){
+    fun getStudyNoteDetail(recordId: Long){
         noteDetailLiveData.value = recordId
     }
 
@@ -30,24 +30,24 @@ class StudyRecordViewModel : ViewModel() {
     }
 
     //保存学习笔记
-    private val saveNoteLiveData = MutableLiveData<Triple<Int,String,String>>()
+    private val saveNoteLiveData = MutableLiveData<Triple<Long,String,String>>()
 
     val saveNoteResp = Transformations.switchMap(saveNoteLiveData) { triple ->
         Repository.saveStudyNote(triple.first,triple.second,triple.third)
     }
 
-    fun saveStudyNote(recordId: Int,content: String,pic: String) {
+    fun saveStudyNote(recordId: Long,content: String,pic: String) {
         saveNoteLiveData.value = Triple(recordId,content,pic)
     }
 
     //删除学习笔记
-    private val removeNoteLiveData = MutableLiveData<Int>()
+    private val removeNoteLiveData = MutableLiveData<Long>()
 
     val removeNoteResp =  Transformations.switchMap(removeNoteLiveData) { recordId ->
         Repository.removeStudyNote(recordId)
     }
 
-    fun removeStudyNote(recordId: Int){
+    fun removeStudyNote(recordId: Long){
         removeNoteLiveData.value = recordId
     }
 

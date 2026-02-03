@@ -2,7 +2,7 @@ package com.lxy.studyroom.logic.network.service
 
 import com.lxy.studyroom.logic.model.Library
 import com.lxy.studyroom.logic.model.LibraryRoom
-import com.lxy.studyroom.logic.model.ResponseResult
+import com.lxy.studyroom.logic.model.base.ResponseResult
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -20,7 +20,7 @@ interface LibraryService {
      * 图书馆详情
      */
     @POST("catalog/getClassifyDetail")
-    fun getClassifyDetail(@Query("classifyId") classifyId: Int) : Call<ResponseResult<LibraryRoom>>
+    fun getClassifyDetail(@Query("classifyId") classifyId: Long) : Call<ResponseResult<LibraryRoom>>
 
 
 

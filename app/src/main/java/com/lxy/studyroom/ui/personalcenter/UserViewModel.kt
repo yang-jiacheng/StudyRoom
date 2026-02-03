@@ -12,7 +12,7 @@ class UserViewModel : ViewModel() {
 
     private val upPasswordLiveData = MutableLiveData<UserDTO>()
 
-    private val userByIdLiveData = MutableLiveData<Int>()
+    private val userByIdLiveData = MutableLiveData<Long>()
 
     private val upInfoLiveData = MutableLiveData<UserDTO>()
 
@@ -40,7 +40,7 @@ class UserViewModel : ViewModel() {
         upPasswordLiveData.value = UserDTO(phone, password, verificationCode,"","","","","")
     }
 
-    fun getUserInfoById(userId: Int){
+    fun getUserInfoById(userId: Long){
         userByIdLiveData.value = userId
     }
 

@@ -3,15 +3,15 @@ package com.lxy.studyroom.logic.model
 import java.io.Serializable
 
 data class Feedback(
-    val id: Int,
-    val userId: Int,
+    val id: Long,
+    val userId: Long,
     val name: String,
     val phone: String,
     val profilePath: String?,
     val content: String,
     val pic: String?,
     val reply: String?,
-    val adminId: Int?,
+    val adminId: Long?,
     val adminName: String?,
     val createTime: String,
     val replyTime: String?,

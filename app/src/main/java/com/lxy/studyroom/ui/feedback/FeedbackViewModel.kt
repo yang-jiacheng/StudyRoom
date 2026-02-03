@@ -30,13 +30,13 @@ class FeedbackViewModel : ViewModel() {
     }
 
     //反馈详情
-    private val feedBackDetailLiveData = MutableLiveData<Int>()
+    private val feedBackDetailLiveData = MutableLiveData<Long>()
 
     val feedBackDetailResp = Transformations.switchMap(feedBackDetailLiveData) { id ->
         Repository.getFeedBackDetail(id)
     }
 
-    fun getFeedBackDetail(id: Int) {
+    fun getFeedBackDetail(id: Long) {
         feedBackDetailLiveData.value = id
     }
 

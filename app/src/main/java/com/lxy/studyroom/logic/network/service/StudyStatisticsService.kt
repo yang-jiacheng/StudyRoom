@@ -1,6 +1,6 @@
 package com.lxy.studyroom.logic.network.service
 
-import com.lxy.studyroom.logic.model.ResponseResult
+import com.lxy.studyroom.logic.model.base.ResponseResult
 import com.lxy.studyroom.logic.model.UserRank
 import retrofit2.Call
 import retrofit2.http.GET
@@ -13,7 +13,7 @@ interface StudyStatisticsService {
      * 提交学习时长
      */
     @POST("studyStatistics/submitStudyDuration")
-    fun submitStudyDuration(@Query("recordId") recordId: Int,@Query("duration") duration: Int) : Call<ResponseResult<String?>>
+    fun submitStudyDuration(@Query("recordId") recordId: Long,@Query("duration") duration: Int) : Call<ResponseResult<String?>>
 
     /**
      * 获取总排行榜
